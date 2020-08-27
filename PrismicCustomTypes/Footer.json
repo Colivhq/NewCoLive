@@ -1,0 +1,131 @@
+{
+    "Main" : {
+      "logo" : {
+        "type" : "Image",
+        "config" : {
+          "constraint" : {
+            "width" : 70,
+            "height" : 17
+          },
+          "thumbnails" : [ ],
+          "label" : "Logo"
+        }
+      },
+      "logo_link" : {
+        "type" : "Link",
+        "config" : {
+          "label" : "Logo link"
+        }
+      },
+      "copyright" : {
+        "type" : "Text",
+        "config" : {
+          "label" : "Copyright",
+          "placeholder" : "All rights reserved"
+        }
+      },
+      "address" : {
+        "type" : "StructuredText",
+        "config" : {
+          "multi" : "paragraph, preformatted, heading1, heading2, heading3, heading4, heading5, heading6, strong, em, hyperlink, image, embed, list-item, o-list-item, o-list-item",
+          "label" : "Address"
+        }
+      },
+      "footer_color" : {
+        "type" : "Color",
+        "config" : {
+          "label" : "Footer color"
+        }
+      },
+      "footer_text_color" : {
+        "type" : "Color",
+        "config" : {
+          "label" : "Footer text color"
+        }
+      },
+      "bottom_bar_color" : {
+        "type" : "Color",
+        "config" : {
+          "label" : "Bottom bar color"
+        }
+      },
+      "bottom_bar_text_color" : {
+        "type" : "Color",
+        "config" : {
+          "label" : "Bottom bar text color"
+        }
+      },
+      "social_media_links" : {
+        "type" : "Group",
+        "config" : {
+          "fields" : {
+            "social_media_icon" : {
+              "type" : "Image",
+              "config" : {
+                "constraint" : {
+                  "width" : 15,
+                  "height" : 15
+                },
+                "thumbnails" : [ ],
+                "label" : "Social media icon"
+              }
+            },
+            "social_media_link" : {
+              "type" : "Link",
+              "config" : {
+                "label" : "Social media link"
+              }
+            }
+          },
+          "label" : "social media links"
+        }
+      },
+      "body" : {
+        "type" : "Slices",
+        "fieldset" : "Slice zone",
+        "config" : {
+          "labels" : {
+            "menu_list" : [ ]
+          },
+          "choices" : {
+            "menu_list" : {
+              "type" : "Slice",
+              "fieldset" : "Menu list",
+              "description" : "Items to list in a menu",
+              "icon" : "menu",
+              "display" : "list",
+              "non-repeat" : {
+                "header" : {
+                  "type" : "Text",
+                  "config" : {
+                    "label" : "Header"
+                  }
+                },
+                "header_link" : {
+                  "type" : "Link",
+                  "config" : {
+                    "label" : "Header link"
+                  }
+                }
+              },
+              "repeat" : {
+                "item" : {
+                  "type" : "Text",
+                  "config" : {
+                    "label" : "Item"
+                  }
+                },
+                "item_link" : {
+                  "type" : "Link",
+                  "config" : {
+                    "label" : "item link",
+                    "allowTargetBlank" : true
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }

@@ -1,0 +1,224 @@
+{
+  "Main" : {
+    "hero_banner" : {
+      "type" : "Select",
+      "config" : {
+        "options" : [ "Slider", "Single image" ],
+        "default_value" : "Slider",
+        "label" : "Hero banner"
+      }
+    },
+    "3d_tours" : {
+      "type" : "Boolean",
+      "config" : {
+        "default_value" : true,
+        "label" : "3D tours"
+      }
+    },
+    "amenities_background_color" : {
+      "type" : "Color",
+      "config" : {
+        "label" : "Amenities background color"
+      }
+    },
+    "room_image" : {
+      "type" : "Select",
+      "config" : {
+        "options" : [ "Slider", "Single image" ],
+        "default_value" : "Slider",
+        "label" : "Room image"
+      }
+    },
+    "rooms_background_color" : {
+      "type" : "Color",
+      "config" : {
+        "label" : "Rooms background color"
+      }
+    },
+    "map" : {
+      "type" : "Boolean",
+      "config" : {
+        "default_value" : true,
+        "label" : "Map"
+      }
+    },
+    "housemates" : {
+      "type" : "Boolean",
+      "config" : {
+        "default_value" : true,
+        "label" : "Housemates"
+      }
+    },
+    "similar_homes" : {
+      "type" : "Boolean",
+      "config" : {
+        "default_value" : true,
+        "label" : "Similar homes"
+      }
+    },
+    "full_width_images" : {
+      "type" : "Boolean",
+      "config" : {
+        "default_value" : false,
+        "label" : "Full width images"
+      }
+    },
+    "body" : {
+      "type" : "Slices",
+      "fieldset" : "Slice zone",
+      "config" : {
+        "labels" : { },
+        "choices" : {
+          "cta" : {
+            "type" : "Slice",
+            "fieldset" : "CTA",
+            "description" : "Full size CTA with background color",
+            "icon" : "touch_app",
+            "display" : "list",
+            "non-repeat" : {
+              "cta_background_color" : {
+                "type" : "Color",
+                "config" : {
+                  "label" : "CTA Background Color"
+                }
+              },
+              "cta_text" : {
+                "type" : "StructuredText",
+                "config" : {
+                  "multi" : "paragraph, preformatted, heading1, heading2, heading3, heading4, heading5, heading6, strong, em, hyperlink, image, embed, list-item, o-list-item, o-list-item",
+                  "label" : "CTA_text"
+                }
+              },
+              "cta_button" : {
+                "type" : "StructuredText",
+                "config" : {
+                  "multi" : "paragraph, preformatted, heading1, heading2, heading3, heading4, heading5, heading6, strong, em, hyperlink, image, embed, list-item, o-list-item, o-list-item",
+                  "label" : "CTA Button"
+                }
+              },
+              "cta_button_link" : {
+                "type" : "Link",
+                "config" : {
+                  "label" : "CTA Button Link"
+                }
+              },
+              "cta_button_color" : {
+                "type" : "Color",
+                "config" : {
+                  "label" : "CTA Button Color"
+                }
+              },
+              "cta_button_text_color" : {
+                "type" : "Color",
+                "config" : {
+                  "label" : "CTA button text color"
+                }
+              },
+              "background_image" : {
+                "type" : "Image",
+                "config" : {
+                  "constraint" : { },
+                  "thumbnails" : [ {
+                    "name" : "tablet",
+                    "width" : 1536,
+                    "height" : 1024
+                  }, {
+                    "name" : "mobile",
+                    "width" : 414,
+                    "height" : 418
+                  } ],
+                  "label" : "background image"
+                }
+              }
+            },
+            "repeat" : { }
+          },
+          "smaller_cta" : {
+            "type" : "Slice",
+            "fieldset" : "Smaller CTA",
+            "description" : "Small CTA with background",
+            "icon" : "touch_app",
+            "display" : "list",
+            "non-repeat" : {
+              "cta_background_color" : {
+                "type" : "Color",
+                "config" : {
+                  "label" : "CTA Background Color"
+                }
+              },
+              "cta_text" : {
+                "type" : "StructuredText",
+                "config" : {
+                  "multi" : "paragraph, preformatted, heading1, heading2, heading3, heading4, heading5, heading6, strong, em, hyperlink, image, embed, list-item, o-list-item, o-list-item",
+                  "label" : "CTA text",
+                  "placeholder" : "Read the Frequently Asked Questions (FAQs) for more"
+                }
+              },
+              "button" : {
+                "type" : "StructuredText",
+                "config" : {
+                  "multi" : "paragraph, preformatted, heading1, heading2, heading3, heading4, heading5, heading6, strong, em, hyperlink, image, embed, list-item, o-list-item, o-list-item",
+                  "label" : "Button",
+                  "placeholder" : "FAQs"
+                }
+              },
+              "button_link" : {
+                "type" : "Link",
+                "config" : {
+                  "label" : "Button link"
+                }
+              },
+              "button_color" : {
+                "type" : "Color",
+                "config" : {
+                  "label" : "Button Color"
+                }
+              }
+            },
+            "repeat" : { }
+          },
+          "text" : {
+            "type" : "Slice",
+            "fieldset" : "Text",
+            "description" : "Rich Text Section",
+            "icon" : "text_fields",
+            "non-repeat" : {
+              "title" : {
+                "type" : "StructuredText",
+                "config" : {
+                  "single" : "heading1, heading2, heading3, heading4, heading5, heading6",
+                  "label" : "Title"
+                }
+              },
+              "text" : {
+                "type" : "StructuredText",
+                "config" : {
+                  "multi" : "paragraph, preformatted, heading1, heading2, heading3, heading4, heading5, heading6, strong, em, hyperlink, image, embed, list-item, o-list-item, o-list-item",
+                  "label" : "text",
+                  "placeholder" : "Your content here"
+                }
+              }
+            },
+            "repeat" : {
+              "column" : {
+                "type" : "StructuredText",
+                "config" : {
+                  "multi" : "paragraph, preformatted, heading1, heading2, heading3, heading4, heading5, heading6, strong, em, hyperlink, image, embed, list-item, o-list-item, o-list-item",
+                  "label" : "column"
+                }
+              },
+              "images_only" : {
+                "type" : "StructuredText",
+                "config" : {
+                  "multi" : "image",
+                  "label" : "Images only"
+                }
+              }
+            },
+            "display" : "list"
+          }
+        }
+      }
+    }
+  }
+}

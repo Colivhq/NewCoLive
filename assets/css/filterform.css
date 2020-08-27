@@ -1,0 +1,216 @@
+.input-group .input-group-text {
+    width: 85px;
+}
+.big-label .input-group-text{
+    text-align: left;
+    white-space: initial;
+}
+.building-filter .dropdown-toggle::after {
+    content: none;
+}
+.form-cms-build .input-group .input-group-text {
+    background-color: #77BF45;
+    border-color: #77BF45;
+    border-radius: 0;
+    padding: 0 15px;
+    font-size: 12px;
+    color: #fff;
+    height: 38px;
+}
+.form-cms-build .form-inputs {
+    border-color: #77BF45;
+    border-radius: 0;
+    color: #77BF45;
+    font-size: 13px;
+    height: 38px;
+}
+.form-control:focus {
+    box-shadow: none;
+}
+.form-cms-build .form-textarea {
+    border-color: #77BF45;
+    border-radius: 0;
+    color: #77BF45;
+    font-size: 13px;
+}
+.form-cms-build input.form-inputs::placeholder,
+.form-cms-build textarea::placeholder {
+    color: #77BF45;
+    font-size: 13px;
+}
+.form-cms-build .form-group {
+    margin-bottom: 25px;
+    outline: 0;
+}
+.form-cms-build .form-group.hidden-group {
+    margin-bottom: 0px;
+}
+.form-cms-build .custom-control-label {
+    color: #77BF45;
+    font-size: 13px;
+    vertical-align: middle;
+    outline: 0;
+}
+.form-cms-build .submit-btn {
+    margin-top: 10px;
+}
+.form-cms-build .submit-btn button {
+    background-color: #77BF45;
+    border: none;
+    max-width: 100px;
+    margin: 0 auto;
+    font-size: 14px;
+    height: 36px;
+    padding: 0 15px;
+}
+.form-cms-build .form-group input[type="checkbox"] {
+    height: initial;
+    width: initial;
+    margin-bottom: 0;
+    display: none;
+    cursor: pointer;
+    top: 10px;
+    left: 4px;
+}
+.form-cms-build .custom-checkbox .custom-control-label::before {
+    border-radius: 0;
+    content: '';
+    -webkit-appearance: none;
+    background-color: #77BF45;
+    border: none;
+    padding: 10px;
+    display: inline-block;
+    position: relative;
+    vertical-align: middle;
+    cursor: pointer;
+    margin-right: 5px;
+    top: -2px;
+    left: 0;
+    box-shadow: none;
+}
+.form-cms-build .custom-checkbox .custom-control-label::after {
+    background: none;
+    content: '';
+    top: 4px;
+    left: 7px;
+    width: 6px;
+    height: 15px;
+    border: none;
+    border-width: none;
+    transform: rotate(45deg);
+}
+.form-cms-build .custom-checkbox .custom-control-input:checked ~ .custom-control-label::after {
+    background-image: none;
+    border: solid #ffffff;
+    border-width: 0 2px 2px 0;
+}
+.form-cms-build .custom-control-input:focus:not(:checked) ~ .custom-control-label::before {
+    box-shadow: none;
+}
+.form-cms-build .custom-control-input:not(:disabled):active ~ .custom-control-label::before {
+    background-color: #77BF45;
+    border-color: #77BF45;
+}
+.form-cms-build .comment-label legend{
+    background-color: #77BF45;
+    border-color: #77BF45;
+    border-radius: 0;
+    padding: 10px 15px !important;
+    font-size: 12px;
+    color: #fff;
+    height: 38px;
+    width: 150px;
+}
+.form-cms-build .form-group.update-check .custom-control {
+    padding-left: 0;
+}
+.custom-select:focus {
+    box-shadow: none;
+}
+@media (min-width: 992px) {
+    /*.form-cms-build .form-group:nth-child(odd) {
+        padding-right: 30px;
+    }
+     .form-cms-build .form-group:nth-child(even) {
+        padding-left: 30px;
+    } */
+    .form-cms-build .form-group.update-check {
+        padding-left: 15px!important;
+        padding-right: 15px!important;
+    }
+}
+@media (max-width: 1199px) {
+    .form-cms-build {
+        padding: 60px 70px;
+    }
+}
+@media (max-width: 575px) {
+    .form-cms-build {
+        padding: 50px 20px;
+    }
+}
+@media (max-width: 480px) {
+    .form-cms-build .input-group .input-group-text {   
+        width: 99.60%;
+    }
+    .form-cms-build .comment-label legend {   
+        width: 100%;
+    }
+    .form-cms-build .input-group {
+        display: block;
+    }
+}
+.b-toaster {
+    z-index: 9999999999;
+}
+.b-form-spinbutton output {
+    border-left: none !important;
+    border-right: none !important;
+}
+.form .title h1 {
+    color: #000;
+    position: relative;
+    font-weight: bold;
+    font-size: 48px;
+    text-transform: capitalize;
+  }
+  .form .title h1:after {
+    content: '';
+    position: absolute;
+    top: auto;
+    bottom: 0;
+    left: 0;
+    right: auto;
+    width: 25px;
+    height: 2px;
+    background-color: #72bf44;
+  }
+  .form .title, .form .description {
+    margin-bottom: 50px;
+  }
+  .form .description p {
+    font-size: 32px;
+    color: #000;
+    font-weight: 200;
+    letter-spacing: 1.2px;
+    line-height: normal;
+    margin-bottom: 0;
+  }
+
+@media (max-width: 767px) {
+  .form .title h1 {
+    font-size: 32px;
+    line-height: 40px;
+  }
+  .form .description p {
+    font-size: 26px;
+  }
+}
+@media (max-width: 375px) {
+  .form .title h1 {
+    font-size: 26px;
+  }
+  .form .description p {
+    font-size: 24px;
+  }
+}

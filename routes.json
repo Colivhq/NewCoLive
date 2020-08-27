@@ -1,0 +1,5 @@
+[
+    "/blog/:uid",
+    "/findahome/:uid",
+    "/page/:uid"
+]

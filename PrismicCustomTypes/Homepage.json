@@ -1,0 +1,635 @@
+{
+    "Main" : {
+      "homepage_banner" : {
+        "type" : "Group",
+        "config" : {
+          "fields" : {
+            "title" : {
+              "type" : "StructuredText",
+              "config" : {
+                "single" : "heading1, heading2",
+                "label" : "Banner Title",
+                "placeholder" : "Site Title..."
+              }
+            },
+            "tagline" : {
+              "type" : "StructuredText",
+              "config" : {
+                "single" : "paragraph",
+                "label" : "Tagline",
+                "placeholder" : "Site Tagline..."
+              }
+            },
+            "text_color" : {
+              "type" : "Color",
+              "config" : {
+                "label" : "Text color"
+              }
+            },
+            "button_link" : {
+              "type" : "Link",
+              "config" : {
+                "label" : "Button Link"
+              }
+            },
+            "hero_image" : {
+              "type" : "Image",
+              "config" : {
+                "constraint" : {
+                  "width" : 1920,
+                  "height" : 1080
+                },
+                "thumbnails" : [ {
+                  "name" : "tablet",
+                  "width" : 1536,
+                  "height" : 2048
+                }, {
+                  "name" : "phone",
+                  "width" : 750,
+                  "height" : 1334
+                } ],
+                "label" : "Hero Image"
+              }
+            },
+            "button_label" : {
+              "type" : "StructuredText",
+              "config" : {
+                "single" : "paragraph",
+                "label" : "Button Label"
+              }
+            },
+            "button_color" : {
+              "type" : "Color",
+              "config" : {
+                "label" : "button color"
+              }
+            },
+            "button_text_color" : {
+              "type" : "Color",
+              "config" : {
+                "label" : "Button text color"
+              }
+            }
+          },
+          "label" : "Homepage Banner",
+          "repeat" : false
+        }
+      },
+      "body" : {
+        "type" : "Slices",
+        "fieldset" : "Slice zone",
+        "config" : {
+          "labels" : {
+            "banner_with_caption" : [ ],
+            "locations" : [ ],
+            "section_title" : [ ],
+            "smaller_cta" : [ ],
+            "comparison_table" : [ ],
+            "cta" : [ ],
+            "text_with_button" : [ ],
+            "image_gallery" : [ {
+              "name" : "onecol",
+              "display" : "onecol"
+            }, {
+              "name" : "twocol",
+              "display" : "twocol"
+            }, {
+              "name" : "threecol",
+              "display" : "threecol"
+            }, {
+              "name" : "fourcol",
+              "display" : "fourcol"
+            }, {
+              "name" : "icons",
+              "display" : "icons"
+            }, {
+              "name" : "avatars",
+              "display" : "avatars"
+            } ],
+            "spacer" : [ ],
+            "background" : [ ]
+          },
+          "choices" : {
+            "image_gallery" : {
+              "type" : "Slice",
+              "fieldset" : "Image Gallery",
+              "description" : "A collection of images, each with a description and an optional link",
+              "icon" : "image",
+              "non-repeat" : {
+                "gallery_title" : {
+                  "type" : "StructuredText",
+                  "config" : {
+                    "single" : "heading2, heading3",
+                    "label" : "Gallery Title",
+                    "placeholder" : "Image Gallery Title...",
+                    "isEverythingAuthorized" : false,
+                    "authorized" : [ "heading2", "heading3", "text" ],
+                    "isAuthorized" : { }
+                  }
+                }
+              },
+              "repeat" : {
+                "feature" : {
+                  "type" : "StructuredText",
+                  "config" : {
+                    "single" : "heading2, heading3, heading4, heading5, heading6",
+                    "label" : "Feature"
+                  }
+                },
+                "image_description" : {
+                  "type" : "StructuredText",
+                  "config" : {
+                    "single" : "paragraph",
+                    "label" : "Image Description",
+                    "placeholder" : "Image description...",
+                    "isEverythingAuthorized" : false,
+                    "authorized" : [ "paragraph", "text" ],
+                    "isAuthorized" : { }
+                  }
+                },
+                "overlay_text" : {
+                  "type" : "StructuredText",
+                  "config" : {
+                    "single" : "paragraph",
+                    "label" : "Overlay Text",
+                    "placeholder" : "Text to add on top of the picture"
+                  }
+                },
+                "link" : {
+                  "type" : "Link",
+                  "config" : {
+                    "label" : "Link",
+                    "placeholder" : "Optional Link"
+                  }
+                },
+                "link_label" : {
+                  "type" : "StructuredText",
+                  "config" : {
+                    "single" : "paragraph",
+                    "label" : "Link Label",
+                    "placeholder" : "Optional Link Label",
+                    "isEverythingAuthorized" : false,
+                    "authorized" : [ "paragraph", "text" ],
+                    "isAuthorized" : { }
+                  }
+                },
+                "image" : {
+                  "type" : "Image",
+                  "config" : {
+                    "constraint" : {
+                      "width" : null,
+                      "height" : null
+                    },
+                    "thumbnails" : [ {
+                      "name" : "threecol",
+                      "width" : 411,
+                      "height" : 411
+                    }, {
+                      "name" : "twocol",
+                      "width" : 630,
+                      "height" : 630
+                    }, {
+                      "name" : "onecol",
+                      "width" : 630,
+                      "height" : 300
+                    }, {
+                      "name" : "fourcol",
+                      "width" : 308,
+                      "height" : 308
+                    }, {
+                      "name" : "icons",
+                      "width" : 58,
+                      "height" : 58
+                    }, {
+                      "name" : "avatars",
+                      "width" : 81,
+                      "height" : 81
+                    } ],
+                    "label" : "Image"
+                  }
+                }
+              },
+              "display" : "grid"
+            },
+            "section_title" : {
+              "type" : "Slice",
+              "fieldset" : "Section Title",
+              "description" : "Section title (with Icon)",
+              "icon" : "title",
+              "display" : "list",
+              "non-repeat" : {
+                "section_icon" : {
+                  "type" : "Image",
+                  "config" : {
+                    "constraint" : {
+                      "width" : 66,
+                      "height" : 63
+                    },
+                    "thumbnails" : [ ],
+                    "label" : "Section Icon"
+                  }
+                },
+                "section_title" : {
+                  "type" : "StructuredText",
+                  "config" : {
+                    "single" : "heading2, heading3, heading4, heading5, heading6",
+                    "label" : "Section title"
+                  }
+                }
+              },
+              "repeat" : { }
+            },
+            "text" : {
+              "type" : "Slice",
+              "fieldset" : "Text",
+              "description" : "Rich Text Section",
+              "icon" : "text_fields",
+              "non-repeat" : {
+                "title" : {
+                  "type" : "StructuredText",
+                  "config" : {
+                    "single" : "heading2, heading3, heading4, heading5, heading6",
+                    "label" : "Title"
+                  }
+                },
+                "text" : {
+                  "type" : "StructuredText",
+                  "config" : {
+                    "multi" : "paragraph, preformatted, heading1, heading2, heading3, heading4, heading5, heading6, strong, em, hyperlink, image, embed, list-item, o-list-item, o-list-item",
+                    "label" : "text",
+                    "placeholder" : "Your content here"
+                  }
+                }
+              },
+              "repeat" : { }
+            },
+            "smaller_cta" : {
+              "type" : "Slice",
+              "fieldset" : "Smaller CTA",
+              "description" : "Small CTA with background",
+              "icon" : "touch_app",
+              "display" : "list",
+              "non-repeat" : {
+                "cta_background_color" : {
+                  "type" : "Color",
+                  "config" : {
+                    "label" : "CTA Background Color"
+                  }
+                },
+                "cta_text" : {
+                  "type" : "StructuredText",
+                  "config" : {
+                    "multi" : "paragraph, preformatted, heading1, heading2, heading3, heading4, heading5, heading6, strong, em, hyperlink, image, embed, list-item, o-list-item, o-list-item",
+                    "label" : "CTA text",
+                    "placeholder" : "Read the Frequently Asked Questions (FAQs) for more"
+                  }
+                },
+                "button" : {
+                  "type" : "StructuredText",
+                  "config" : {
+                    "multi" : "paragraph, preformatted, heading1, heading2, heading3, heading4, heading5, heading6, strong, em, hyperlink, image, embed, list-item, o-list-item, o-list-item",
+                    "label" : "Button",
+                    "placeholder" : "FAQs"
+                  }
+                },
+                "button_link" : {
+                  "type" : "Link",
+                  "config" : {
+                    "label" : "Button link"
+                  }
+                },
+                "button_color" : {
+                  "type" : "Color",
+                  "config" : {
+                    "label" : "Button Color"
+                  }
+                }
+              },
+              "repeat" : { }
+            },
+            "spacer" : {
+              "type" : "Slice",
+              "fieldset" : "Spacer",
+              "description" : "Add vertical space",
+              "icon" : "check_box_outline_blank",
+              "display" : "list",
+              "non-repeat" : {
+                "pixels" : {
+                  "type" : "Number",
+                  "config" : {
+                    "label" : "Pixels"
+                  }
+                }
+              },
+              "repeat" : { }
+            },
+            "table" : {
+              "type" : "Slice",
+              "fieldset" : "Table",
+              "description" : "Table creation component",
+              "icon" : "border_all",
+              "display" : "list",
+              "non-repeat" : {
+                "title" : {
+                  "type" : "StructuredText",
+                  "config" : {
+                    "single" : "heading2, heading3, heading4, heading5, heading6",
+                    "label" : "Title"
+                  }
+                },
+                "text" : {
+                  "type" : "StructuredText",
+                  "config" : {
+                    "multi" : "paragraph",
+                    "label" : "Text"
+                  }
+                },
+                "columns" : {
+                  "type" : "Number",
+                  "config" : {
+                    "label" : "Columns"
+                  }
+                }
+              },
+              "repeat" : {
+                "cell" : {
+                  "type" : "StructuredText",
+                  "config" : {
+                    "multi" : "paragraph, strong, em, hyperlink, image, list-item, o-list-item",
+                    "label" : "Cell"
+                  }
+                }
+              }
+            },
+            "background" : {
+              "type" : "Slice",
+              "fieldset" : "background",
+              "description" : "Change background color from here",
+              "icon" : "color_lens",
+              "display" : "list",
+              "non-repeat" : {
+                "background_color" : {
+                  "type" : "Color",
+                  "config" : {
+                    "label" : "background color"
+                  }
+                }
+              },
+              "repeat" : { }
+            },
+            "blog_cards" : {
+              "type" : "Slice",
+              "fieldset" : "Blog cards",
+              "description" : "List of blog posts",
+              "icon" : "find_in_page",
+              "display" : "list",
+              "non-repeat" : {
+                "title" : {
+                  "type" : "StructuredText",
+                  "config" : {
+                    "single" : "heading2, heading3, heading4, heading5, heading6",
+                    "label" : "Title"
+                  }
+                },
+                "background" : {
+                  "type" : "Color",
+                  "config" : {
+                    "label" : "background"
+                  }
+                },
+                "card_limit" : {
+                  "type" : "Number",
+                  "config" : {
+                    "label" : "Card limit"
+                  }
+                }
+              },
+              "repeat" : { }
+            },
+            "text-image" : {
+              "type" : "Slice",
+              "fieldset" : "Text-Image",
+              "description" : "text on one side, image on the other",
+              "icon" : "texture",
+              "display" : "list",
+              "non-repeat" : {
+                "title" : {
+                  "type" : "StructuredText",
+                  "config" : {
+                    "single" : "heading2, heading3, heading4, heading5, heading6",
+                    "label" : "Title"
+                  }
+                },
+                "background" : {
+                  "type" : "Color",
+                  "config" : {
+                    "label" : "background"
+                  }
+                }
+              },
+              "repeat" : {
+                "image" : {
+                  "type" : "Image",
+                  "config" : {
+                    "constraint" : {
+                      "width" : 600,
+                      "height" : 400
+                    },
+                    "thumbnails" : [ ],
+                    "label" : "image"
+                  }
+                },
+                "title" : {
+                  "type" : "StructuredText",
+                  "config" : {
+                    "single" : "heading2, heading3, heading4, heading5, heading6",
+                    "label" : "Title"
+                  }
+                },
+                "subtitle" : {
+                  "type" : "StructuredText",
+                  "config" : {
+                    "single" : "heading2, heading3, heading4, heading5, heading6",
+                    "label" : "subtitle"
+                  }
+                },
+                "text" : {
+                  "type" : "StructuredText",
+                  "config" : {
+                    "multi" : "paragraph",
+                    "label" : "text"
+                  }
+                },
+                "image_position" : {
+                  "type" : "Select",
+                  "config" : {
+                    "options" : [ "Right", "Left" ],
+                    "default_value" : "Right",
+                    "label" : "image position"
+                  }
+                }
+              }
+            },
+            "cta1" : {
+              "type" : "Slice",
+              "fieldset" : "CTA",
+              "description" : "Full size CTA with background color",
+              "icon" : "touch_app",
+              "display" : "list",
+              "non-repeat" : {
+                "cta_background_color" : {
+                  "type" : "Color",
+                  "config" : {
+                    "label" : "CTA Background Color"
+                  }
+                },
+                "cta_text" : {
+                  "type" : "StructuredText",
+                  "config" : {
+                    "multi" : "paragraph, preformatted, heading1, heading2, heading3, heading4, heading5, heading6, strong, em, hyperlink, image, embed, list-item, o-list-item, o-list-item",
+                    "label" : "CTA_text"
+                  }
+                },
+                "cta_button" : {
+                  "type" : "StructuredText",
+                  "config" : {
+                    "multi" : "paragraph, preformatted, heading1, heading2, heading3, heading4, heading5, heading6, strong, em, hyperlink, image, embed, list-item, o-list-item, o-list-item",
+                    "label" : "CTA Button"
+                  }
+                },
+                "cta_button_link" : {
+                  "type" : "Link",
+                  "config" : {
+                    "label" : "CTA Button Link"
+                  }
+                },
+                "cta_button_color" : {
+                  "type" : "Color",
+                  "config" : {
+                    "label" : "CTA Button Color"
+                  }
+                },
+                "cta_button_text_color" : {
+                  "type" : "Color",
+                  "config" : {
+                    "label" : "CTA button text color"
+                  }
+                },
+                "background_image" : {
+                  "type" : "Image",
+                  "config" : {
+                    "constraint" : { },
+                    "thumbnails" : [ {
+                      "name" : "tablet",
+                      "width" : 1536,
+                      "height" : 1024
+                    }, {
+                      "name" : "mobile",
+                      "width" : 414,
+                      "height" : 418
+                    } ],
+                    "label" : "background image"
+                  }
+                }
+              },
+              "repeat" : { }
+            }
+          }
+        }
+      }
+    },
+    "Social Cards" : {
+      "seo_page_title" : {
+        "type" : "StructuredText",
+        "config" : {
+          "single" : "heading1, heading2, heading3, heading4, heading5, heading6",
+          "label" : "SEO Page Title"
+        }
+      },
+      "seo_description" : {
+        "type" : "StructuredText",
+        "config" : {
+          "single" : "paragraph",
+          "label" : "SEO Description"
+        }
+      },
+      "meta_title" : {
+        "type" : "StructuredText",
+        "config" : {
+          "single" : "heading1",
+          "label" : "Meta Title",
+          "placeholder" : "Title..."
+        }
+      },
+      "meta_description" : {
+        "type" : "StructuredText",
+        "config" : {
+          "single" : "paragraph",
+          "label" : "Meta Description",
+          "placeholder" : "Description..."
+        }
+      },
+      "meta_image" : {
+        "type" : "Image",
+        "config" : {
+          "constraint" : {
+            "width" : 1200,
+            "height" : 650
+          },
+          "thumbnails" : [ ],
+          "label" : "Meta Image"
+        }
+      },
+      "meta_url" : {
+        "type" : "Link",
+        "config" : {
+          "label" : "Meta URL"
+        }
+      },
+      "meta_site_name" : {
+        "type" : "StructuredText",
+        "config" : {
+          "single" : "paragraph",
+          "label" : "Site Name"
+        }
+      },
+      "twitter_handle" : {
+        "type" : "Text",
+        "config" : {
+          "label" : "Twitter Handle",
+          "placeholder" : "Twitter handle..."
+        }
+      },
+      "twitter_title" : {
+        "type" : "StructuredText",
+        "config" : {
+          "single" : "paragraph",
+          "label" : "Twitter Title",
+          "placeholder" : "Twitter Card Title..."
+        }
+      },
+      "twitter_description" : {
+        "type" : "StructuredText",
+        "config" : {
+          "single" : "paragraph",
+          "label" : "Twitter Description",
+          "placeholder" : "Twitter Card Description..."
+        }
+      },
+      "twitter_image" : {
+        "type" : "Image",
+        "config" : {
+          "constraint" : {
+            "width" : 300,
+            "height" : 300
+          },
+          "thumbnails" : [ {
+            "name" : "large_image",
+            "width" : 600,
+            "height" : 314
+          } ],
+          "label" : "Twitter Image"
+        }
+      }
+    }
+  }

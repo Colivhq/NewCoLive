@@ -1,0 +1,105 @@
+{
+    "Main" : {
+      "title" : {
+        "type" : "StructuredText",
+        "config" : {
+          "placeholder" : "Menu title...",
+          "single" : "heading1"
+        }
+      },
+      "logo" : {
+        "type" : "Image",
+        "config" : {
+          "constraint" : {
+            "width" : 130,
+            "height" : 32
+          },
+          "thumbnails" : [ ],
+          "label" : "Logo"
+        }
+      },
+      "header_color" : {
+        "type" : "Color",
+        "config" : {
+          "label" : "Header color"
+        }
+      },
+      "header_transparency_perc" : {
+        "type" : "Number",
+        "config" : {
+          "label" : "Header transparency %"
+        }
+      },
+      "header_text_color" : {
+        "type" : "Color",
+        "config" : {
+          "label" : "Header text color"
+        }
+      },
+      "logo_link" : {
+        "type" : "Link",
+        "config" : {
+          "label" : "Logo Link"
+        }
+      },
+      "bolder_link_label" : {
+        "type" : "Text",
+        "config" : {
+          "label" : "Bolder Link Label"
+        }
+      },
+      "bolder_link" : {
+        "type" : "Link",
+        "config" : {
+          "label" : "Bolder link",
+          "allowTargetBlank" : true
+        }
+      },
+      "body" : {
+        "type" : "Slices",
+        "fieldset" : "Slice zone",
+        "config" : {
+          "labels" : {
+            "header" : [ ]
+          },
+          "choices" : {
+            "header" : {
+              "type" : "Slice",
+              "fieldset" : "header",
+              "description" : "Header menu",
+              "icon" : "menu",
+              "display" : "list",
+              "non-repeat" : {
+                "label" : {
+                  "type" : "Text",
+                  "config" : {
+                    "label" : "Menu label"
+                  }
+                },
+                "link" : {
+                  "type" : "Link",
+                  "config" : {
+                    "label" : "Link"
+                  }
+                }
+              },
+              "repeat" : {
+                "sub_nav_label" : {
+                  "type" : "Text",
+                  "config" : {
+                    "label" : "Submenu label"
+                  }
+                },
+                "sub_nav_link" : {
+                  "type" : "Link",
+                  "config" : {
+                    "label" : "Submenu label"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }

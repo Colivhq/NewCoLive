@@ -1,0 +1,55 @@
+{
+  "name": "NewCoLive-Sample-Website",
+  "version": "1.0.0",
+  "description": "Template website for a new coliving business (based on ColivHQ backend and Prismic.io CMS)",
+  "main": "nuxt.config.js",
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "@nuxtjs/axios": "^5.10.3",
+    "@nuxtjs/dotenv": "^1.4.1",
+    "@nuxtjs/gtm": "^2.3.0",
+    "@nuxtjs/prismic": "^1.1.0",
+    "@nuxtjs/proxy": "^1.3.3",
+    "@nuxtjs/pwa": "^3.0.0-beta.20",
+    "@nuxtjs/sitemap": "^2.3.2",
+    "bootstrap": "^4.4.1",
+    "bootstrap-vue": "^2.13.1",
+    "cookie-universal-nuxt": "^2.1.3",
+    "cookies": "^0.8.0",
+    "lazysizes": "^5.2.2",
+    "nuxt": "^2.12.2",
+    "prismic-javascript": "^2.1.5",
+    "prismic-vue": "^2.0.0",
+    "vue": "^2.6.11",
+    "vue-carousel": "^0.18.0",
+    "vue-moment": "^4.1.0",
+    "vue-multiselect": "^2.1.6",
+    "vue-socialmedia-share": "^1.0.1"
+  },
+  "devDependencies": {
+    "node-sass": "^4.13.1",
+    "nodemon": "^2.0.2",
+    "sass-loader": "^8.0.2",
+    "webpack": "^4.41.5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Colivhq/NewCoLive.git"
+  },
+  "keywords": [
+    "coliving",
+    "listing",
+    "CMS"
+  ],
+  "author": "ColivHQ",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Colivhq/NewCoLive/issues"
+  },
+  "homepage": "https://github.com/Colivhq/NewCoLive#readme"
+}
