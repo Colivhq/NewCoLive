@@ -22,7 +22,7 @@
               <span class="navbar-toggler-icon">
                 <i
                   :style="{'color': fields.header.text_color}"
-                  class="fa fa-bars text-s "
+                  class="fa fa-bars text-s"
                   aria-haspopup="true"
                   aria-expanded="false"></i>
                 <!-- <img src="https://images.prismic.io/cmct-web/26783acb-d53b-4a36-ad70-d45f942fe546_Mobile+menu%402x.png?auto=compress,format" alt="Mobile menu icon"> -->
@@ -108,6 +108,13 @@ export default {
       }
     }
   },
+  head () {
+    return {
+      meta: [
+        { rel: 'stylesheet', href: "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" }
+      ]
+    }
+  },
   computed:{
     color () {
       if (this.fields.header.background_color) {
@@ -155,7 +162,8 @@ export default {
                 let color = 'rgba('+[r, g, b].join(',')+',' + transparency + ')';
                 return {
                   'background-color': color,
-                  'border': '1px solid ' + color
+                  'border': '1px solid ' + color,
+                  'color': this.fields.header.text_color
                 }
             }
       }
@@ -207,17 +215,17 @@ export default {
 }
 .site-header,
 .site-header a {
-  color: darkgrey;
+  /* color: darkgrey; */
   font-weight:400;
 }
 .site-header nav a:hover {
   color: gray;
 }
 
-.site-header,
+/* .site-header,
 .site-header a {
   color: white;
-}
+} */
 .site-header nav a:hover {
   color: darkgrey;
 }
