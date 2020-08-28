@@ -103,7 +103,7 @@
                 <div class="main-part form-cms-build">
                     <b-form @submit="onSubmit">
                         <div class="row">
-                            <b-form-group class="col-lg-12 col-md-12 col-sm-12">
+                            <b-form-group class="col-lg-12 col-md-12 col-sm-12 mx-auto">
                                 <b-input-group prepend-html="FIRST<br/>NAME" class="input-group mb-2 mr-sm-2 mb-sm-0">
                                     <b-form-input
                                         id="first_name"
@@ -115,7 +115,7 @@
                                     ></b-form-input>
                                 </b-input-group>
                             </b-form-group>
-                            <b-form-group class="col-lg-12 col-md-12 col-sm-12">
+                            <b-form-group class="col-lg-12 col-md-12 col-sm-12 mx-auto">
                                 <b-input-group prepend-html="LAST<br/>NAME" class="input-group mb-2 mr-sm-2 mb-sm-0">
                                     <b-form-input
                                         id="last_name"
@@ -128,7 +128,7 @@
                                 </b-input-group>
                             </b-form-group>
                         
-                            <b-form-group class="col-lg-12 col-md-12 col-sm-12">
+                            <b-form-group class="col-lg-12 col-md-12 col-sm-12 mx-auto">
                                 <b-input-group prepend-html="PHONE" class="input-group mb-2 mr-sm-2 mb-sm-0">
                                     <b-form-input
                                         id="phone_number"
@@ -138,7 +138,7 @@
                                     ></b-form-input>
                                 </b-input-group>
                             </b-form-group>
-                            <b-form-group class="col-lg-12 col-md-12 col-sm-12">
+                            <b-form-group class="col-lg-12 col-md-12 col-sm-12 mx-auto">
                                 <b-input-group prepend-html="EMAIL" class="input-group mb-2 mr-sm-2 mb-sm-0">
                                     <b-form-input
                                         id="email"
@@ -150,22 +150,22 @@
                                     ></b-form-input>
                                 </b-input-group>
                             </b-form-group>
-                            <b-form-group class="col-lg-12 col-md-12 col-sm-12">
+                            <b-form-group class="col-lg-12 col-md-12 col-sm-12 mx-auto">
                                 <b-input-group prepend-html="START<br/>OF STAY" class="input-group mb-2 mr-sm-2 mb-sm-0">
                                     <b-form-select id="los" v-model="form.sos" :options="sosOptions" class="form-inputs" required></b-form-select>
                                 </b-input-group>
                             </b-form-group>
-                            <b-form-group class="col-lg-12 col-md-12 col-sm-12">
+                            <b-form-group class="col-lg-12 col-md-12 col-sm-12 mx-auto">
                                 <b-input-group prepend-html="LENGTH<br/>OF STAY" class="input-group mb-2 mr-sm-2 mb-sm-0">
                                     <b-form-select id="los" v-model="form.los" :options="losOptions" class="form-inputs" required></b-form-select>
                                 </b-input-group>
                             </b-form-group>
-                            <b-form-group class="col-lg-12 col-md-12 col-sm-12">
+                            <b-form-group class="col-lg-12 col-md-12 col-sm-12 mx-auto">
                                 <b-input-group prepend-html="AGE<br/>GROUP" class="input-group mb-2 mr-sm-2 mb-sm-0">
                                     <b-form-select id="age_group" v-model="form.ageGroup" :options="ageGroupOptions" class="form-inputs" required></b-form-select>
                                 </b-input-group>
                             </b-form-group>
-                            <b-form-group class="col-lg-12 col-md-12 col-sm-12">
+                            <b-form-group class="col-lg-12 col-md-12 col-sm-12 mx-auto">
                                 <b-input-group prepend-html="JOB" class="input-group mb-2 mr-sm-2 mb-sm-0">
                                     <b-form-input
                                         id="job_function"
@@ -177,7 +177,7 @@
                                     ></b-form-input>
                                 </b-input-group>
                             </b-form-group>
-                            <b-form-group class="col-sm-12 update-check">
+                            <b-form-group class="col-sm-12 update-check mx-auto">
                                 <b-form-checkbox
                                     id="marketing_update"
                                     v-model="form.status"
@@ -447,7 +447,11 @@ export default {
     }
 
     .find-home-outer .side-form {
-        width: 80%;
+        width: 100%;
+    }
+
+    .find-home-outer .side-form .form-group {
+        max-width: 333px;
     }
 }
 </style>
