@@ -50,14 +50,16 @@
 			<div class="cms-main-wrap">
 				<div class="home-detail-slider-content">
 					<div class="home-detail-title"><h1>{{ homeDetails.name }}</h1></div>
-					<div class="nb-main">
-						<img src="~/assets/img/city.png" alt="city marker" class="nb-img">
+					<div class="nb-main mt-3">
+						<!-- <img src="~/assets/img/city.png" alt="city marker" class="nb-img"> -->
+						<i class="fa fa-map icon_ font-weight-bold" aria-haspopup="true" aria-expanded="false"></i>
 						<div class="nb-label"> {{ homeDetails.cityName }}, {{ homeDetails.neighbourhoodName }} </div>
 					</div>
 					<div v-if="homeDetails.totalBedrooms != null" class="icons-details row clearfix">
 						<div class="icon-1 icon col-lg-3 col-md-4 col-sm-6 ">
 							<div class="icon-wrap">
-								<img src="~/assets/img/bedroom.png" alt="bedroom" class="build-icon">
+								<i class="fa fa-bed icon_ font-weight-bold" aria-haspopup="true" aria-expanded="false"></i>
+								<!-- <img src="~/assets/img/bedroom.png" alt="bedroom" class="build-icon"> -->
 							</div>
 							<div class="desc">
 								<p>{{ homeDetails.totalBedrooms }}</p>
@@ -576,6 +578,11 @@ h3 {
 	font-size: 25px;
     color: #000;
 }
+
+.icon_ {
+	font-size: 25px;
+}
+
 /* Slider Bottom */
 .home-detail .home-detail-slider .home-detail-title h1 {
 	font-weight: bold;

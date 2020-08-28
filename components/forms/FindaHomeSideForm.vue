@@ -445,5 +445,9 @@ export default {
         width: 50%;
         padding-left: 15px;
     }
+
+    .find-home-outer .side-form {
+        width: 80%;
+    }
 }
 </style>

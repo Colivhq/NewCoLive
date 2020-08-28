@@ -40,10 +40,10 @@
     </footer>
     <div :style="{'background-color': bottom.backGround_color ,'color': bottom.text_color}" class="bottom-bar">
       <div class="row footer-bottom px-0">
-        <div class="col-sm-6 footer-copyright pl-0">
+        <div class="col-sm-6 footer-copyright pl-lg-0">
           <span class="logo-right-text">{{ fields.copyright }}</span>
         </div>
-        <div class="col-sm-6 footer-social text-right pr-0">
+        <div class="col-sm-6 footer-social text-left text-md-right pr-0">
           <figure v-for="(item, index) in bottom.social_media_links" :key="'social_media_links-item-' + index" class="social-icon">  
             <prismic-link :field="item.social_media_link">
               <prismic-image :field="item.social_media_icon"/>
@@ -234,9 +234,9 @@ footer .footer-logo {
   }
 }
 @media(max-width: 767px) {
-  .footer-bottom{
+  /* .footer-bottom{
     padding: 10px 0 60px 0;
-  }
+  } */
   footer .footer-logo .logo-right-text {
     margin-left: 0;
   }
