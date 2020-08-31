@@ -104,7 +104,12 @@
                     <b-form @submit="onSubmit">
                         <div class="row">
                             <b-form-group class="col-lg-12 col-md-12 col-sm-12 mx-auto">
-                                <b-input-group prepend-html="FIRST<br/>NAME" class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                <b-input-group class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                    <template v-slot:prepend>
+                                        <b-input-group-text class="text-wrap px-2">
+                                            FIRST NAME
+                                        </b-input-group-text>
+                                    </template>
                                     <b-form-input
                                         id="first_name"
                                         v-model="form.firstName"
@@ -116,7 +121,12 @@
                                 </b-input-group>
                             </b-form-group>
                             <b-form-group class="col-lg-12 col-md-12 col-sm-12 mx-auto">
-                                <b-input-group prepend-html="LAST<br/>NAME" class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                <b-input-group class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                    <template v-slot:prepend>
+                                        <b-input-group-text class="text-wrap px-2">
+                                            LAST NAME
+                                        </b-input-group-text>
+                                    </template>
                                     <b-form-input
                                         id="last_name"
                                         placeholder="Required Field"
@@ -129,7 +139,12 @@
                             </b-form-group>
                         
                             <b-form-group class="col-lg-12 col-md-12 col-sm-12 mx-auto">
-                                <b-input-group prepend-html="PHONE" class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                <b-input-group class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                    <template v-slot:prepend>
+                                        <b-input-group-text class="text-wrap px-2">
+                                            PHONE
+                                        </b-input-group-text>
+                                    </template>
                                     <b-form-input
                                         id="phone_number"
                                         v-model="form.phone"
@@ -139,7 +154,12 @@
                                 </b-input-group>
                             </b-form-group>
                             <b-form-group class="col-lg-12 col-md-12 col-sm-12 mx-auto">
-                                <b-input-group prepend-html="EMAIL" class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                <b-input-group class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                    <template v-slot:prepend>
+                                        <b-input-group-text class="text-wrap px-2">
+                                            EMAIL
+                                        </b-input-group-text>
+                                    </template>
                                     <b-form-input
                                         id="email"
                                         v-model="form.email"
@@ -151,22 +171,42 @@
                                 </b-input-group>
                             </b-form-group>
                             <b-form-group class="col-lg-12 col-md-12 col-sm-12 mx-auto">
-                                <b-input-group prepend-html="START<br/>OF STAY" class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                <b-input-group class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                    <template v-slot:prepend>
+                                        <b-input-group-text class="text-wrap px-2">
+                                            START OF STAY
+                                        </b-input-group-text>
+                                    </template>
                                     <b-form-select id="los" v-model="form.sos" :options="sosOptions" class="form-inputs" required></b-form-select>
                                 </b-input-group>
                             </b-form-group>
                             <b-form-group class="col-lg-12 col-md-12 col-sm-12 mx-auto">
-                                <b-input-group prepend-html="LENGTH<br/>OF STAY" class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                <b-input-group class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                    <template v-slot:prepend>
+                                        <b-input-group-text class="text-wrap px-2">
+                                            LENGTH OF STAY
+                                        </b-input-group-text>
+                                    </template>
                                     <b-form-select id="los" v-model="form.los" :options="losOptions" class="form-inputs" required></b-form-select>
                                 </b-input-group>
                             </b-form-group>
                             <b-form-group class="col-lg-12 col-md-12 col-sm-12 mx-auto">
-                                <b-input-group prepend-html="AGE<br/>GROUP" class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                <b-input-group class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                    <template v-slot:prepend>
+                                        <b-input-group-text class="text-wrap px-2">
+                                            AGE GROUP
+                                        </b-input-group-text>
+                                    </template>
                                     <b-form-select id="age_group" v-model="form.ageGroup" :options="ageGroupOptions" class="form-inputs" required></b-form-select>
                                 </b-input-group>
                             </b-form-group>
                             <b-form-group class="col-lg-12 col-md-12 col-sm-12 mx-auto">
-                                <b-input-group prepend-html="JOB" class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                <b-input-group class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                    <template v-slot:prepend>
+                                        <b-input-group-text class="text-wrap px-2">
+                                            JOB
+                                        </b-input-group-text>
+                                    </template>
                                     <b-form-input
                                         id="job_function"
                                         v-model="form.job"
