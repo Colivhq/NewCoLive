@@ -60,6 +60,24 @@
 				<!-- Sharing icons for : END -->
 				<prismic-rich-text  class="build-desc blog_body" :field="blog_body"/>
 			</div>
+			<div v-if="author" class="p-3 border m-3">
+				<h1>Author</h1>
+				<b-row>
+					<b-col cols="12" md="2">
+						<prismic-image :field="author.data.author_picture" class="author-image w-auto"/>
+					</b-col>
+					<b-col>
+						<span>Name: <span class="font-weight-bold">{{author.data.author}}</span></span>
+						<prismic-rich-text  class="build-desc" :field="author.data.author_bio"/>
+						<figure v-for="(item, index) in author.data.social_networks"
+							:key="'social_media_links-item-' + index" class="">  
+							<prismic-image :field="item.social_icon" class="w-auto"/>
+							<!-- <prismic-link :field="item.social_links" class=" icons">
+							</prismic-link> -->
+						</figure>
+					</b-col>
+				</b-row>
+			</div>
 		</div>
 	</div>
     <slices-block :slices="slices"/>
@@ -78,8 +96,20 @@ export default {
 	},
 	data() {
 		return {
-			socialShareStickyHeight: 0
+			socialShareStickyHeight: 0,
+			author: null
 		}
+	},
+	created() {
+		console.log(this.document);
+		// this.$prismic.api.query(this.$prismic.predicates.at('document.type', 'topics')).then((response) => {
+        //     console.log(response, '***********');
+		// });
+		
+		this.$prismic.api.query(this.$prismic.predicates.at('document.type', this.document.author.type)).then((response) => {
+			this.author = response.results[0]
+			console.log(this.author);
+        });
 	},
 	head () {
 		return {
@@ -264,6 +294,10 @@ export default {
 .blog-slider-content-outer h2, .blog-slider-content-outer h3 {
     color: #000;
 }
+
+.icons {
+	height: 100px;
+}
 @media(min-width: 992px){
 	.blog .blog-slider .blog-slider-content-outer {
 		padding: 20px 70px 35px 0px;
@@ -359,6 +393,10 @@ export default {
     position:sticky;
     top:100px;
     z-index:100;
+}
+
+.author-image {
+	height: 100px;
 }
 @media(max-width: 1024px){
 	.blog .blog-slider .blog-slider-content-outer {
