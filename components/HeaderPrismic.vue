@@ -87,6 +87,7 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
 export default {
   name: 'header-prismic',
   data () {
@@ -113,6 +114,11 @@ export default {
       meta: [
         { rel: 'stylesheet', href: "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" }
       ]
+    }
+  },
+  watch: {
+    "fields.logo"(newVal) {
+      this.$store.commit('setHeaderLogo' ,newVal)
     }
   },
   computed:{
@@ -176,6 +182,7 @@ export default {
     }
   },
   methods: {
+    ...mapMutations('setHeaderLogo'),
     closeMenu() {
         $('#navbarmenuContent').collapse('hide');
     },

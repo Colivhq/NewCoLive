@@ -7,7 +7,8 @@ const mainStore = () => {
 			menu: {},
 			roomId: '',
 			openModal: false,
-			homeList: []
+			homeList: [],
+			headerLogo: null
         },
         mutations: {
             SET_MENU(state, menu) {
@@ -24,7 +25,10 @@ const mainStore = () => {
 			},
 			setHomeLists(state, homes) {
                 state.homeList = homes
-            }
+			},
+			setHeaderLogo(state, payload) {
+				state.headerLogo = payload
+			}
         },
         actions: {
             async fetchMenu({ commit }) {
