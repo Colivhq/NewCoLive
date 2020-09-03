@@ -3,7 +3,7 @@ require('dotenv').config();
 export default {
   mode: 'universal',
   env: {
-    baseUrl: process.env.BASE_URL,
+    baseUrl: process.env.BASE_URL || 'https://newcolive.colivhq.com',
     mapKey: process.env.GOOGLE_MAP_KEY,
     // proxyUrl: 'https://cors-anywhere.herokuapp.com/',
     bearer: process.env.COLIV_HQ_KEY,
