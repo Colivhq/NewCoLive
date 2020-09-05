@@ -86,6 +86,7 @@ export default {
   },
 
   sitemap: {
+    path: '/sitemap.xml',
     routes() {
       return getAppRoutes();
     },
