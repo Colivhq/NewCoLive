@@ -60,20 +60,20 @@
 				<!-- Sharing icons for : END -->
 				<prismic-rich-text  class="build-desc blog_body" :field="blog_body"/>
 			</div>
-			<div v-if="author" class="p-3 border m-3">
-				<h1>Author</h1>
+			<div v-if="author" class="m-3 author_box" :style="{'color': toc_accent_color, 'background-color': toc_background_color}">
+				<h2 :style="{'color': toc_accent_color}">About the author</h2>
 				<b-row>
 					<b-col cols="12" md="2">
 						<prismic-image :field="author.data.author_picture" class="author-image w-auto"/>
 					</b-col>
 					<b-col>
-						<span>Name: <span class="font-weight-bold">{{author.data.author}}</span></span>
+						<span class="font-weight-bold">{{author.data.author}}</span>
 						<prismic-rich-text  class="build-desc" :field="author.data.author_bio"/>
 						<figure v-for="(item, index) in author.data.social_networks"
 							:key="'social_media_links-item-' + index" class="">  
-							<prismic-image :field="item.social_icon" class="w-auto"/>
-							<!-- <prismic-link :field="item.social_links" class=" icons">
-							</prismic-link> -->
+							<prismic-link :field="item.social_links" class=" icons">
+								<prismic-image :field="item.social_icon" class="w-auto"/>
+							</prismic-link>
 						</figure>
 					</b-col>
 				</b-row>
@@ -101,14 +101,14 @@ export default {
 		}
 	},
 	created() {
-		console.log(this.document);
 		// this.$prismic.api.query(this.$prismic.predicates.at('document.type', 'topics')).then((response) => {
-        //     console.log(response, '***********');
+			//     console.log(response, '***********');
 		// });
 		
 		this.$prismic.api.query(this.$prismic.predicates.at('document.type', this.document.author.type)).then((response) => {
 			this.author = response.results[0]
-			console.log(this.author);
+			this.structuredData.author.name = response.results[0].data.author 
+			this.structuredData.publisher.url = this.$store.state.headerLogo.url
         });
 	},
 	head () {
@@ -193,7 +193,6 @@ export default {
 				return slice;
 			});
 			console.log('selSlice: ', selSlice);
-			
 			return {
 				// Page content
 				document: document,
@@ -215,7 +214,9 @@ export default {
 				blog_article: document.blog_article,
 				blog_body: document.blog_body,
 
-				
+				// TOC
+				toc_accent_color: document.toc_accent_color,
+				toc_background_color: document.toc_background_color,
 
 				//SEO
 				meta_title: (document.page_title.length) ? document.page_title[0].text : '',
@@ -250,7 +251,7 @@ export default {
 						"name": document.author,
 						"logo": {
 							"@type": "ImageObject",
-							"url": process.env.baseUrl + "/assets/img/LogoBlogPosts.png",
+							"url": '',
 							"width": 550,
 							"height": 60
 						}
@@ -264,9 +265,9 @@ export default {
 	},
 	filters: {
         moment: function (date) {
-            return moment(date).format('DD-MM-YYYY');
+			return moment(date).format('DD-MM-YYYY');
         }
-	},
+	}
 }
 </script>
 <style>
@@ -398,6 +399,11 @@ export default {
 .author-image {
 	height: 100px;
 }
+
+.author_box {
+	padding: 50px;
+}
+
 @media(max-width: 1024px){
 	.blog .blog-slider .blog-slider-content-outer {
     	padding-left: 15px;

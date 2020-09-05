@@ -220,6 +220,7 @@ export default {
 					});				
 				}
 				let amenitiesFeatures = []
+				homeData.amenitiesArray =  homeData.amenitiesArray.sort((a,b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0)); 
 				homeData.amenitiesArray.forEach(function(feature) { 
 					amenitiesFeatures.push( {
 						"@type": "http://schema.org/LocationFeatureSpecification",
