@@ -23,7 +23,7 @@
 							<p>{{ publish_date | moment }}</p>
 						</div>
 					</div>
-					<div class="icon-2 icon col-lg-2 col-md-6 col-sm-6" v-if="modified_date != null">
+					<!-- <div class="icon-2 icon col-lg-2 col-md-6 col-sm-6" v-if="modified_date != null">
 						<div class="icon-wrap">
 							<svg class="bi bi-calendar" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 								<path fill-rule="evenodd" d="M14 0H2a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2V2a2 2 0 00-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z" clip-rule="evenodd"/>
@@ -33,7 +33,7 @@
 						<div class="desc">
 							<p>{{ modified_date | moment }}</p>
 						</div>
-					</div>
+					</div> -->
 				</div>
 				<div class="blog-topics">
 					<p class="topic" v-for="topic in topics" :key="topic.topic">
@@ -60,17 +60,19 @@
 				<!-- Sharing icons for : END -->
 				<prismic-rich-text  class="build-desc blog_body" :field="blog_body"/>
 			</div>
-			<div v-if="author" class="m-3 author_box" :style="{'color': toc_accent_color, 'background-color': toc_background_color}">
-				<h2 :style="{'color': toc_accent_color}">About the author</h2>
+
+			<!-- Author box -->
+			<div v-if="author" class="author_box" :style="{'border-left': `6px solid`+ toc_accent_color, 'background-color': toc_background_color}">
+				<h2>About the author</h2>
 				<b-row>
 					<b-col cols="12" md="2">
 						<prismic-image :field="author.data.author_picture" class="author-image w-auto"/>
 					</b-col>
 					<b-col>
 						<span class="font-weight-bold">{{author.data.author}}</span>
-						<prismic-rich-text  class="build-desc" :field="author.data.author_bio"/>
+						<prismic-rich-text :field="author.data.author_bio" class="author_bio"/>
 						<figure v-for="(item, index) in author.data.social_networks"
-							:key="'social_media_links-item-' + index" class="">  
+							:key="'social_media_links-item-' + index">  
 							<prismic-link :field="item.social_links" class=" icons">
 								<prismic-image :field="item.social_icon" class="w-auto"/>
 							</prismic-link>
@@ -101,15 +103,10 @@ export default {
 		}
 	},
 	created() {
+		console.log(this.structuredData);
 		// this.$prismic.api.query(this.$prismic.predicates.at('document.type', 'topics')).then((response) => {
 			//     console.log(response, '***********');
 		// });
-		
-		this.$prismic.api.query(this.$prismic.predicates.at('document.type', this.document.author.type)).then((response) => {
-			this.author = response.results[0]
-			this.structuredData.author.name = response.results[0].data.author 
-			this.structuredData.publisher.url = this.$store.state.headerLogo.url
-        });
 	},
 	head () {
 		return {
@@ -182,16 +179,19 @@ export default {
 			script: [{ type: 'application/ld+json', json: this.structuredData }]
 		}
 	},
-  	async asyncData({ $prismic, params, error }) {
+  	async asyncData({ $prismic, params, error, store }) {
 		try{
 		// Query to get post content
 			const document = (await $prismic.api.getByUID('blogpage', params.uid)).data
+			let author = await store.dispatch('fetchAuthor', document.author.type)
 			const selSlice = document.body.filter(function(slice) {                
 				if(slice.slice_type == 'blog_cards') {
 					Object.assign(slice, { current_blog: params.uid })
 				}
 				return slice;
 			});
+
+			const header_logo_url = store.state.headerLogo ? store.state.headerLogo.url : ''
 			console.log('selSlice: ', selSlice);
 			return {
 				// Page content
@@ -201,6 +201,9 @@ export default {
 					title: document.page_title,
 					title_color: document.title_color
 				},
+
+				// author
+				author: author.results[0],
 				// Set slices as variable
 				slices: document.body,
 				
@@ -244,14 +247,14 @@ export default {
 					"dateModified": document.modified_date,
 					"author": {
 						"@type": "Person",
-						"name": document.autor
+						"name": author.results[0].data.author
 					},
 					"publisher": {
 						"@type": "Organization",
 						"name": document.author,
 						"logo": {
 							"@type": "ImageObject",
-							"url": '',
+							"url": header_logo_url,
 							"width": 550,
 							"height": 60
 						}
@@ -402,6 +405,11 @@ export default {
 
 .author_box {
 	padding: 50px;
+	margin-bottom: 50px;
+}
+
+.author_bio p {
+	margin-bottom: 1rem;
 }
 
 @media(max-width: 1024px){
