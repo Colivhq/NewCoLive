@@ -394,13 +394,12 @@ export default {
     },
     methods: {
         cityChange() {
-            // if(!this.cities.includes(this.searchFilter.city)) {
-            //     console.log('jksdnjksnkj');
-            //     this.searchFilter.city = ''
-            //     this.searchFilter.area = ['Any Area']
-            // } else {
-            //     this.areas = this.cityArea[this.searchFilter.city] || ['Any Area']
-            // }
+            if(!this.cities.includes(this.searchFilter.city)) {
+                this.searchFilter.city = ''
+                this.searchFilter.area = ['Any Area']
+            } else {
+                this.areas = this.cityArea[this.searchFilter.city] || ['Any Area']
+            }
         },
         curFormatter(value) {
             return '$' + value + '/month'
@@ -533,7 +532,7 @@ export default {
         }
         axios.post('https://asia-east2-colivhq-backend.cloudfunctions.net/apiHomes',{},{
 			headers: {
-				Authorization: 'Bearer '+process.env.bearer
+				Authorization: 'Bearer '+process.env.COLIV_HQ_KEY
 			}
 		}).then((response) => {
             this.cities.push('Any City')

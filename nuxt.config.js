@@ -64,8 +64,8 @@ export default {
     '@nuxtjs/prismic',
     '@nuxtjs/axios',
     '@nuxtjs/proxy',
-    '@nuxtjs/sitemap'
-    /* '@nuxtjs/pwa', */
+    '@nuxtjs/sitemap',
+    '@nuxtjs/pwa'
   ],
   axios: {
     proxy: true // Can be also an object with default options

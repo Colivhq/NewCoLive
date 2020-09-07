@@ -139,7 +139,7 @@ export default {
 				"cityId": (document.cityid != undefined ) ? document.cityid : ""
 			},{
 				headers: {
-					Authorization: 'Bearer '+process.env.bearer
+					Authorization: 'Bearer '+process.env.COLIV_HQ_KEY
 				}
 			})
 			let homeList = [];
