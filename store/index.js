@@ -41,6 +41,14 @@ const mainStore = () => {
 					commit('SET_ERROR', e);
 				}
 			},
+			async fetchAuthor ({},payload) {
+				try {
+					let resp = await this.$prismic.api.query(this.$prismic.predicates.at('document.type', payload))
+					return resp
+				} catch (error) {
+					commit('SET_ERROR', error);
+				}
+			}
 			/* fetchHomelist({ commit }, payload) {
 				// return new Promise((resolve, reject) => {
 					return this.$axios.post('https://asia-east2-colivhq-backend.cloudfunctions.net/apiHomes', {
