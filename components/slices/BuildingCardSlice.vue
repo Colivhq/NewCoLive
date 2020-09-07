@@ -526,9 +526,8 @@ export default {
         }
     },
     beforeMount() {
-        if(this.defaultFilter != undefined) {
-            this.searchFilter.city = this.defaultFilter.city
-            this.openFilterbox('city')
+        if(this.defaultFilter.cityid == '') {
+            this.searchFilter.city = 'Any City'
         }
         axios.post('https://asia-east2-colivhq-backend.cloudfunctions.net/apiHomes',{},{
 			headers: {
@@ -539,12 +538,16 @@ export default {
             response.data.data.forEach( (cittarr) => { 
                 this.cities.push(cittarr.city)
                 this.cityArea[cittarr.city] = ['Any Area', ...cittarr.hood.map(a => a.name)];
-                if(this.defaultFilter != undefined) {
-                    this.areas = this.cityArea[this.defaultFilter.city]
-                    this.cities = [this.defaultFilter.city]
+                if(this.defaultFilter.cityid != '' && (this.defaultFilter.cityid == cittarr.cityId)) {
+                    this.areas = this.cityArea[cittarr.city]
+                    this.cities = [cittarr.city]
+                    this.searchFilter.city = cittarr.city
+                    this.resFilter.city = cittarr.city
+                    
                 }
             });
         });
+        this.openFilterbox('city')
     }
 }
 </script>
