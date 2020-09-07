@@ -3,7 +3,7 @@
     <b-container fluid>
       <b-row>
        <b-col :cols="slice.primary.map ? '7' : 12"  :class="[isList ?  ((!isMap) ? 'col-sm-12':'' ) : 'map-hide']" ref="map-block">
-          <div class="showHideButton">
+          <div class="showHideButton" v-if="slice.primary.map === true">
             <button v-show="(showToggleButton && isDisplayMode)" class="btn sticky-toggle-map-button mb-5" @click="showMapOrList()"> 
                 <span v-show="isMap">Show List</span>
                 <span v-show="isList">Show Map</span>
@@ -419,13 +419,15 @@ export default {
     }
   },
   created () {
-      if (process.browser) {
+      if (process.browser && (this.slice.primary.map === true) ) {
         window.addEventListener('resize', this.handleResize)
         document.addEventListener('scroll', this.handleScroll)
       }
   },
   beforeMount () {
-    this.handleResize();
+    if (this.slice.primary.map === true) {
+      this.handleResize();
+    }
   },
   destroyed() {
     document.removeEventListener('scroll', this.handleScroll);
