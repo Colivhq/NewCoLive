@@ -22,7 +22,11 @@
                                     <div class="blog-bottom-content">
                                         <div class="blog-topics">
                                             <p class="topic" v-for="topic in item.data.topics" :key="topic.topic">
-                                                <span class="topic-content">{{ topic.topic }}</span>
+                                                <span class="topic-content">
+                                                    <a :href="topic.href">
+                                                        {{topic.data.topic}}
+                                                    </a>
+                                                </span>
                                             </p>
                                         </div>
                                     </div>
@@ -52,13 +56,15 @@ export default {
             return moment(date).format('DD-MM-YYYY');
         }
     },
-    created() {
+    async created() {
         let limit= this.slice.primary.card_limit + 1;
         this.$prismic.api.query(this.$prismic.predicates.at('document.type', 'blogpage'), 	
-        { orderings : '[my.blogpage.publish_date desc]', 'pageSize': limit }).then((response) => {
+        { orderings : '[my.blogpage.publish_date desc]', 'pageSize': limit }).then(async (response) => {
             //this.blogList1 = response.results
             for (let blog of Object.values(response.results)) { 
                 if(blog.uid != this.slice.current_blog && this.blogList.length <= this.slice.primary.card_limit) {
+                    let topic = (await this.$store.dispatch('fetchAuthor', 'topics')).results
+                    blog.data.topics = topic
                     this.blogList.push(blog)
                 }
             }
@@ -142,6 +148,11 @@ export default {
     position: relative;
     top: -5px;
 }
+
+.blog-card .card-main .blog-bottom-content .blog-topics .topic-content a {
+    text-decoration: none;
+}
+
 .blog-bottom-content .price >>> p { 
     font-weight: bold;
 }

@@ -93,7 +93,6 @@ export default {
     try{
 	  // Query to get post content
 	    const document = (await $prismic.api.getByUID('page', 'blog')).data
-		
       return {
         document: document,
         // Page content

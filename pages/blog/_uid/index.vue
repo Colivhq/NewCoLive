@@ -36,8 +36,10 @@
 					</div> -->
 				</div>
 				<div class="blog-topics">
-					<p class="topic" v-for="topic in topics" :key="topic.topic">
-						{{ topic.topic }}
+					<p class="topic" v-for="topic in topics_array" :key="topic.topic">
+						<a :href="topic.href">
+							{{topic.data.topic}}
+						</a>
 					</p>
 				</div>
 				<prismic-rich-text  class="build-desc" :field="blog_article"/>
@@ -101,12 +103,6 @@ export default {
 			socialShareStickyHeight: 0,
 			author: null
 		}
-	},
-	created() {
-		console.log(this.structuredData);
-		// this.$prismic.api.query(this.$prismic.predicates.at('document.type', 'topics')).then((response) => {
-			//     console.log(response, '***********');
-		// });
 	},
 	head () {
 		return {
@@ -184,6 +180,7 @@ export default {
 		// Query to get post content
 			const document = (await $prismic.api.getByUID('blogpage', params.uid)).data
 			let author = await store.dispatch('fetchAuthor', document.author.type)
+			let topic = (await store.dispatch('fetchAuthor', 'topics')).results
 			const selSlice = document.body.filter(function(slice) {                
 				if(slice.slice_type == 'blog_cards') {
 					Object.assign(slice, { current_blog: params.uid })
@@ -201,6 +198,9 @@ export default {
 					title: document.page_title,
 					title_color: document.title_color
 				},
+
+				// topics
+				topics_array: topic,
 
 				// author
 				author: author.results[0],
@@ -251,7 +251,7 @@ export default {
 					},
 					"publisher": {
 						"@type": "Organization",
-						"name": document.author,
+						"name": JSON.stringify(process.env.COMPANY_NAME),
 						"logo": {
 							"@type": "ImageObject",
 							"url": header_logo_url,
@@ -302,6 +302,7 @@ export default {
 .icons {
 	height: 100px;
 }
+
 @media(min-width: 992px){
 	.blog .blog-slider .blog-slider-content-outer {
 		padding: 20px 70px 35px 0px;
@@ -335,6 +336,11 @@ export default {
     margin-top: 5px;
     text-align: center;
 }
+
+.blog .blog-slider .blog-slider-content .blog-topics .topic a {
+	text-decoration: none;
+}
+
 .blog .blog-slider .blog-title > :first-child {
 	margin-bottom: 10px;
 	color: #222;
@@ -365,7 +371,7 @@ export default {
 }
 .blog .blog-slider .build-desc p {
 	margin-bottom: 0;
-    margin-top: 30px;
+    /* margin-top: 30px; */
 }
 .blog .blog-slider .icons-details .icon:nth-child(n+5) {
 	margin-top: 15px;
