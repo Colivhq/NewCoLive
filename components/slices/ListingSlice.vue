@@ -2,14 +2,34 @@
   <section class="content-page findahome">
     <b-container fluid>
       <b-row>
-        <b-col :cols="slice.primary.map ? '7' : 12">
+       <b-col :cols="slice.primary.map ? '7' : 12"  :class="[isList ?  ((!isMap) ? 'col-sm-12':'' ) : 'map-hide']" ref="map-block">
+          <div class="showHideButton">
+            <button v-show="(showToggleButton && isDisplayMode)" class="btn sticky-toggle-map-button mb-5" @click="showMapOrList()"> 
+                <span v-show="isMap">Show List</span>
+                <span v-show="isList">Show Map</span>
+            </button>
+            <button v-show="showToggleButton"  id="sticky-map-button"  class="btn toggle-map-button mb-5" @click="showMapOrList()"> 
+                <span v-show="isMap">Show List</span>
+                <span v-show="isList">Show Map</span>
+            </button>
+            </div>
           <building-card-slice
             :home-lists="homeLists"
             :home-lists-copy="homeLists"
             :default-filter="slice.primary"
             :divider_and_button_color="divider_and_button_color"/>
         </b-col>
-        <b-col cols="5" class="map-outer" v-if="slice.primary.map === true">
+        <b-col cols="5" :class="[isMap ? ((!isList) ? 'col-sm-12':'' ) : 'map-hide'] +' map-outer'" v-if="slice.primary.map === true" ref="map-block">
+          <div class="showHideButton">
+            <button v-show="(showToggleButton && isDisplayMode)" class="btn sticky-toggle-map-button mb-5" @click="showMapOrList()"> 
+                <span v-show="isMap">Show List</span>
+                <span v-show="isList">Show Map</span>
+            </button>
+            <button v-show="showToggleButton"  id="sticky-map-button"  class="btn toggle-map-button mb-5" @click="showMapOrList()"> 
+                <span v-show="isMap">Show List</span>
+                <span v-show="isList">Show Map</span>
+            </button>
+          </div>
           <div class="google-map" :id="mapName"></div>
         </b-col>
       </b-row>
@@ -64,7 +84,11 @@ export default {
       markerIcon: '',
       mapStyleJson: mapJson,
       markers: [],
-      divider_and_button_color: ''
+      divider_and_button_color: '',
+      showToggleButton: false,
+      isMap: false,
+      isList: true,
+      isDisplayMode: true,
 		}
 	},
 	head () {
@@ -289,12 +313,14 @@ export default {
     },
     showMapOrList() {
         this.isMap = !this.isMap
+        this.isList = !this.isList
         if(this.isMap) {
             this.toggleMapButton = 'List'
             this.setZoom();
         } else {
             this.toggleMapButton = 'Map'
         }
+        this.scrollToMap('map-block')
     },
     setCoordinates() {
       if (this.slice.primary.map && this.homeLists.length) {
@@ -354,12 +380,14 @@ export default {
     handleResize() {
       if(this.currentWidth != window.innerWidth) {
         if(window.innerWidth < 768) {
-            if(this.isMap == true) {
+            if(this.isMap == true && this.isList == true) {
+                this.isList = false
                 this.showMapOrList()
             }
             this.showToggleButton = true;
         } else {
             this.isMap = true;
+            this.isList = true;
             this.showToggleButton = false;
         }
         this.setZoom()
@@ -384,6 +412,10 @@ export default {
         } else {
             this.isDisplayMode = true;
         }
+    },
+    scrollToMap(refName) {
+        var element = this.$refs[refName];
+        element.scrollIntoView({ behavior: 'smooth' });
     }
   },
   created () {
@@ -402,6 +434,24 @@ export default {
 </script>
 
 <style>
+.toggle-map-button {
+    min-width: 225px;
+    color: #fff;
+    background-color: #f55e61;
+    border-color: #f55e61;
+}
+.sticky-toggle-map-button {
+    min-width: 225px;
+    color: #fff;
+    background-color: #f55e61;
+    border-color: #f55e61;
+}
+.map-hide {
+    display: none;
+}
+.showHideButton {
+  text-align: center;
+}
 .map-outer {
 	position: fixed;
     top: 0;
@@ -413,5 +463,28 @@ export default {
 
 .map-outer .google-map {
   height: 100%;
+}
+@media (max-width: 767px) {
+  .sticky-toggle-map-button {
+    min-width: inherit;
+    display: block;
+    width: 100%;
+    position: fixed;
+    top: 80px;
+    left: 0;
+    right: 0;
+    border-radius: 0;
+    z-index: 2;
+  }
+  .sticky-toggle-map-button.btn.focus, .sticky-toggle-map-button.btn:focus {
+      box-shadow: none;
+  }
+  .map-outer {
+      position: relative;
+      height: 250px;
+      width: 100%;
+      z-index: 9;
+      overflow-x: scroll;
+  }
 }
 </style>
