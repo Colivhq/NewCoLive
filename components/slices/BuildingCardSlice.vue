@@ -59,7 +59,7 @@
                                         class="ml-3 form-inputs"
                                         v-model="searchFilter.area"
                                         :options="areas"
-                                        :style="{'border-color': divider_and_button_color, 'color': divider_and_button_color}"
+                                        :style="{'border-color': divider_and_button_color, 'color': divider_and_button_color, '--divider-and-button-color': divider_and_button_color}"
                                         name="flavour-1"
                                     ></b-form-checkbox-group>
                                 </b-input-group>
@@ -555,17 +555,12 @@ export default {
 <style scoped>
 @import "@/assets/css/filterform.css";
 .form-cms-build >>> .custom-control-label {
-    color: #8BC34A !important;
+    color: var(--divider-and-button-color) !important;
 }
 .form-cms-build >>> .custom-checkbox .custom-control-label::before {
-    background-color: #8BC34A;
+    background-color: var(--divider-and-button-color);
     border: none;
     box-shadow: none;
-}
-.custom-control-input:checked~.custom-control-label::before {
-    color: #fff;
-    border-color: #8BC34A;
-    background-color: #8BC34A;
 }
 .filter-item #neighbour {
     width: 100%;
