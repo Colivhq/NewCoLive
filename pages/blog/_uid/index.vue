@@ -181,6 +181,7 @@ export default {
 			const document = (await $prismic.api.getByUID('blogpage', params.uid)).data
 			let author = await store.dispatch('fetchAuthor', document.author.type)
 			let topic = (await store.dispatch('fetchAuthor', 'topics')).results
+			let logo = (await $prismic.api.getSingle('menu')).data.logo
 			const selSlice = document.body.filter(function(slice) {                
 				if(slice.slice_type == 'blog_cards') {
 					Object.assign(slice, { current_blog: params.uid })
@@ -190,6 +191,7 @@ export default {
 
 			const header_logo_url = store.state.headerLogo ? store.state.headerLogo.url : ''
 			console.log('selSlice: ', selSlice);
+
 			return {
 				// Page content
 				document: document,
@@ -254,7 +256,7 @@ export default {
 						"name": JSON.stringify(process.env.COMPANY_NAME),
 						"logo": {
 							"@type": "ImageObject",
-							"url": header_logo_url,
+							"url": logo.url,
 							"width": 550,
 							"height": 60
 						}

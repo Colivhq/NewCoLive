@@ -526,7 +526,7 @@ export default {
         }
     },
     beforeMount() {
-        if(this.defaultFilter.cityid == '') {
+        if(this.defaultFilter && this.defaultFilter.cityid == '') {
             this.searchFilter.city = 'Any City'
         }
         axios.post('https://asia-east2-colivhq-backend.cloudfunctions.net/apiHomes',{},{
