@@ -8,7 +8,7 @@
         <div :class="'gallery row ' + [isGallaryClass ? gallaryClass : '']">
           <template v-for="(item, index) in slice.items" >
             <div v-if="slice.slice_label == 'onecol'" v-bind:key="index" class="gallery-item col-lg-12">        
-              <prismic-image :field="item.image[slice.slice_label]" class="single-image"/> <!-- this sets the right image resolution, based on the slice label -->
+              <prismic-image :field="item.image[slice.slice_label]" class="single-image lazyload"/> <!-- this sets the right image resolution, based on the slice label -->
               <h3><prismic-rich-text :field="item.feature" class="title"/></h3>
               <prismic-rich-text :field="item.image_description" class="description"/>
               <prismic-rich-text :field="item.overlay_text" />
@@ -16,7 +16,7 @@
             </div>
             <div v-else-if="slice.slice_label == 'twocol'" v-bind:key="index" class="gallery-item col-lg-6">
               <prismic-link :field="item.link" class="gallery-link">
-                <prismic-image :field="item.image[slice.slice_label]"/> <!-- this sets the right image resolution, based on the slice label -->
+                <prismic-image :field="item.image[slice.slice_label]" class="lazyload"/> <!-- this sets the right image resolution, based on the slice label -->
                 <h3 v-if="item.feature.length > 0"><prismic-rich-text :field="item.feature" class="title"/>{{item.feature.text}}</h3>
                 <prismic-rich-text :field="item.image_description" class="description"/>
                 <prismic-rich-text :field="item.overlay_text" class="image-link" />
@@ -33,7 +33,7 @@
               </prismic-link>
             </div>
             <div v-else-if="slice.slice_label == 'fourcol'" v-bind:key="index" class="gallery-item col-lg-3">
-              <prismic-image :field="item.image[slice.slice_label]"/> <!-- this sets the right image resolution, based on the slice label -->
+              <prismic-image :field="item.image[slice.slice_label]" class="lazyload"/> <!-- this sets the right image resolution, based on the slice label -->
               <h3><prismic-rich-text :field="item.feature" class="title"/></h3>
               <prismic-rich-text :field="item.image_description" class="description"/>
               <prismic-rich-text :field="item.overlay_text" />
