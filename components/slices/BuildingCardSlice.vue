@@ -526,11 +526,7 @@ export default {
         }
     },
     beforeMount() {
-<<<<<<< HEAD
         if(this.defaultFilter != undefined && this.defaultFilter.cityid == '') {
-=======
-        if(this.defaultFilter && this.defaultFilter.cityid == '') {
->>>>>>> 7dcd568beb37492f113dfd6f7e578c575a95dfe1
             this.searchFilter.city = 'Any City'
         }
         axios.post('https://asia-east2-colivhq-backend.cloudfunctions.net/apiHomes',{},{
