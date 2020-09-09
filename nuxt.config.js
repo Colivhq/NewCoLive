@@ -66,7 +66,8 @@ export default {
     '@nuxtjs/proxy',
     '@nuxtjs/sitemap',
     '@nuxtjs/pwa',
-    'nuxt-lazy-load'
+    'nuxt-lazy-load',
+    '@nuxtjs/robots'
   ],
   axios: {
     proxy: true // Can be also an object with default options
