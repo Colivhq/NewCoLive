@@ -2,7 +2,7 @@
   <section class="content-page findahome">
     <b-container fluid>
       <b-row>
-       <b-col :cols="slice.primary.map ? '7' : 12"  :class="[isList ?  ((!isMap) ? 'col-sm-12':'' ) : 'map-hide']" ref="map-block">
+       <b-col :cols="slice.primary.map ? '7' : 12"  :class="[isList ?  ((!isMap) ? 'col-12':'' ) : 'map-hide']" ref="map-block">
           <div class="showHideButton" v-if="slice.primary.map === true">
             <button v-show="(showToggleButton && isDisplayMode)" :style="{'background-color': divider_and_button_color, 'border-color': divider_and_button_color}" class="btn sticky-toggle-map-button mb-5" @click="showMapOrList()"> 
                 <span v-show="isMap">Show List</span>
@@ -19,7 +19,7 @@
             :default-filter="slice.primary"
             :divider_and_button_color="divider_and_button_color"/>
         </b-col>
-        <b-col cols="5" :class="[isMap ? ((!isList) ? 'col-sm-12':'' ) : 'map-hide'] +' map-outer'" v-if="slice.primary.map === true" ref="map-block">
+        <b-col cols="5" :class="[isMap ? ((!isList) ? 'col-12':'' ) : 'map-hide'] +' map-outer'" v-if="slice.primary.map === true" ref="map-block">
           <div class="showHideButton">
             <button v-show="(showToggleButton && isDisplayMode)" :style="{'background-color': divider_and_button_color, 'border-color': divider_and_button_color}" class="btn sticky-toggle-map-button mb-5" @click="showMapOrList()"> 
                 <span v-show="isMap">Show List</span>
