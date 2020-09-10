@@ -538,7 +538,7 @@ export default {
             response.data.data.forEach( (cittarr) => { 
                 this.cities.push(cittarr.city)
                 this.cityArea[cittarr.city] = ['Any Area', ...cittarr.hood.map(a => a.name)];
-                if(this.defaultFilter.cityid != '' && (this.defaultFilter.cityid == cittarr.cityId)) {
+                if(this.defaultFilter != undefined && this.defaultFilter.cityid != '' && (this.defaultFilter.cityid == cittarr.cityId)) {
                     this.areas = this.cityArea[cittarr.city]
                     this.cities = [cittarr.city]
                     this.searchFilter.city = cittarr.city

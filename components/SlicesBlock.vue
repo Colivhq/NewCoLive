@@ -1,5 +1,5 @@
 <template>
-    <div >
+    <div class="slices-wrapper">
         <!-- Slice section template -->
         <section v-for="(slice, index) in slices" :key="'slice-' + index">
             <!-- Text slice component -->

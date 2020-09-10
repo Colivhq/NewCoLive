@@ -184,11 +184,6 @@ export default {
 				content: 'summary'
 			},
 			{
-				hid: 'twittercreator',
-				name: 'twitter:creator',
-				content: this.twitter_handle
-			},
-			{
 				hid: 'twitterimage',
 				name: 'twitter:image',
 				content: this.meta_image
@@ -201,6 +196,7 @@ export default {
 				// Query to get post content
 				// let documentPage = (await this.$prismic.api.getByUID('page', this.params.uid))
 				const document = (await $prismic.api.getSingle('homes')).data
+				console.log('document: ', document)
 				const appartments = await $axios.post('https://asia-east2-colivhq-backend.cloudfunctions.net/apiHomes', {
 					"homeId": params.uid,
 					"neighborhoodId": "",
@@ -242,6 +238,7 @@ export default {
 				homeData['threeD_tour'] = document['3d_tours'],
 				homeData['hero_banner'] = document.hero_banner,
 				homeData['amenities_background_color'] = document.amenities_background_color,
+				homeData['side_form_background_color'] = document.amenities_background_color,
 				homeData['housemates'] = document.housemates,
 				homeData['map'] = document.map,
 				homeData['room_image'] = document.room_image,
@@ -258,9 +255,8 @@ export default {
 							homeData.description.substring(0, 167) + '...' :
 							homeData.description : '',
 					meta_image: meta_image,
-					meta_site_name: 'ColivHQ web',
+					meta_site_name: process.env.COMPANY_NAME,
 					meta_url: process.env.baseUrl+'/findahome/'+ params.uid,
-					twitter_handle: 'ColivHQ',
 					structuredData: {
 						"@context": "http://schema.org/",
 						"@type": "Apartment",
@@ -334,7 +330,8 @@ export default {
 			buildingId: this.homeDetails.buildingId,
 			homeName: this.homeDetails.name,
 			cityName: this.homeDetails.cityName,
-			cityID: this.homeDetails.cityId
+			cityID: this.homeDetails.cityId,
+			sideFormBackgroundColor: this.homeDetails.side_form_background_color
 		}, ...this.slices]
 			
 		// Similar homes
