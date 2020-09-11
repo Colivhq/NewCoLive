@@ -49,30 +49,31 @@
 		<div class="inner-content-wrapper">
 			<div class="cms-main-wrap">
 				<div class="home-detail-slider-content">
-					<div class="home-detail-title"><h1>{{ homeDetails.name }}</h1></div>
-					<div class="nb-main mt-3">
-						<!-- <img src="~/assets/img/city.png" alt="city marker" class="nb-img"> -->
-						<i class="fa fa-map icon_ font-weight-bold" aria-haspopup="true" aria-expanded="false"></i>
-						<div class="nb-label"> {{ homeDetails.cityName }}, {{ homeDetails.neighbourhoodName }} </div>
-					</div>
-					<div v-if="homeDetails.totalBedrooms != null" class="icons-details row clearfix">
-						<div class="icon-1 icon col-lg-3 col-md-4 col-sm-6 ">
-							<div class="icon-wrap">
-								<i class="fa fa-bed icon_ font-weight-bold" aria-haspopup="true" aria-expanded="false"></i>
-								<!-- <img src="~/assets/img/bedroom.png" alt="bedroom" class="build-icon"> -->
-							</div>
-							<div class="desc">
-								<p>{{ homeDetails.totalBedrooms }}</p>
-								<div><p>bedrooms</p></div>
-							</div>
+					<div class="nb-main mt-3 row">
+						<!-- <i class="fa fa-map icon_ font-weight-bold" aria-haspopup="true" aria-expanded="false"></i> -->
+						<div class="col-sm-6"> {{ homeDetails.cityName }}, {{ homeDetails.neighbourhoodName }} </div>
+						<div v-if="homeDetails.totalBedrooms != null" class="icons-details col-sm-6">
+							<div class="icon-1 icon pull-right">
+								<div class="icon-wrap">
+									<i class="fa fa-bed icon_ font-weight-bold" aria-haspopup="true" aria-expanded="false"></i>
+									<!-- <img src="~/assets/img/bedroom.png" alt="bedroom" class="build-icon"> -->
+								</div>
+								<div class="desc">
+									<p>{{ homeDetails.totalBedrooms }}</p>
+									<div><p>bedrooms</p></div>
+								</div>
+							</div>	
 						</div>
 					</div>
+					<div class="home-detail-title"><h1>{{ homeDetails.name }}</h1></div>
+					<div class="home-detail-address">{{ homeDetails.address }}</div>
 					<div class="build-desc">
 						<p v-html="homeDetails.description"></p>
 					</div>
 					<!-- <p class="location">Location: {{ fields.geohome-detail.latitude }}, {{ fields.geohome-detail.longitude }}</p> -->
 				</div>
 			</div>
+			<hr>
 		</div>
 	</div>
 	<slices-block :slices="slices"/>
@@ -310,30 +311,6 @@ export default {
 			});
 		});
 
-		// Spacer slice
-		this.slices = [{
-			slice_type: 'spacer',
-			slice_label: null,
-			items: [],
-			primary: {
-				pixels:100
-			}
-		}, ...this.slices]
-
-		// Home details slice
-		this.slices = [{
-			slice_type: 'form',
-			slice_label: 'homedetails',
-			homeID: this.$route.params.uid,
-			OperatorID: this.homeDetails.operatorId,
-			neighborhoodId: this.homeDetails.neighborhoodId,
-			buildingId: this.homeDetails.buildingId,
-			homeName: this.homeDetails.name,
-			cityName: this.homeDetails.cityName,
-			cityID: this.homeDetails.cityId,
-			sideFormBackgroundColor: this.homeDetails.side_form_background_color
-		}, ...this.slices]
-			
 		// Similar homes
 		if (this.homeDetails.similar_homes) {
 			let homeList = [];
@@ -393,10 +370,10 @@ export default {
 			this.homeLists = homeList;
 		}
 
-		// Room mates slice
 		if(this.homeLists != undefined && this.homeLists.length > 0) {
 			this.slices = [{
 				slice_type: 'building_cards',
+				slice_devider: true,
 				items: this.homeLists,
 				primary: {
 					title: [
@@ -409,41 +386,14 @@ export default {
 				}
 			}, ...this.slices]
 		}
+		
 		// Spacer slice
 		this.slices = [{
 			slice_type: 'spacer',
 			slice_label: null,
 			items: [],
 			primary: {
-				pixels:100
-			}
-		}, ...this.slices]
-
-		// Room mates slice
-		if(this.homeDetails.housemates && this.homeDetails.housematesArray != undefined &&  this.homeDetails.housematesArray.length > 0) {
-			this.slices = [{
-				isBuildingPage:"Yes",
-				slice_type: 'image_gallery',
-				slice_label: 'avatars',
-				items: this.homeDetails.housematesArray,
-				primary: {
-					gallery_title: [
-						{
-							spans: [],
-							text:"Housemates",
-							type:"heading2"
-						}
-					]
-				}
-			}, ...this.slices]
-		}
-		// Spacer slice
-		this.slices = [{
-			slice_type: 'spacer',
-			slice_label: null,
-			items: [],
-			primary: {
-				pixels:100
+				pixels:50
 			}
 		}, ...this.slices]
 
@@ -460,6 +410,7 @@ export default {
 					}
 				},
 				slice_type: 'map',
+				slice_devider: true,
 				slice_label: null,
 				items: [],
 			}, ...this.slices]
@@ -471,63 +422,7 @@ export default {
 			slice_label: null,
 			items: [],
 			primary: {
-				pixels:100
-			}
-		}, ...this.slices]
-
-		// Rooms slice
-		if(this.homeDetails.roomsArray != undefined && this.homeDetails.roomsArray.length > 0) {
-			this.slices = [{
-				primary:{
-					title: [{
-						spans: [],
-						text:"Rooms",
-						type:"heading2"
-					}]
-				},
-				slice_type: 'rooms',
-				room_image: this.homeDetails.room_image,
-				background: this.homeDetails.rooms_background_color,
-				slice_label: null,
-				items: this.homeDetails.roomsArray,
-			}, ...this.slices]
-		}
-
-		// Spacer slice
-		this.slices = [{
-			slice_type: 'spacer',
-			slice_label: null,
-			items: [],
-			primary: {
-				pixels:100
-			}
-		}, ...this.slices]
-
-		// Amenities slice
-		if(this.homeDetails.amenitiesArray != undefined && this.homeDetails.amenitiesArray.length > 0) {
-			this.slices = [{
-				slice_type: 'image_gallery',
-				slice_label: 'icons',
-				background: this.homeDetails.amenities_background_color,
-				items: this.homeDetails.amenitiesArray,
-				primary: {
-					gallery_title: [
-						{
-							spans: [],
-							text:"Amenities",
-							type:"heading2"
-						}
-					]
-				}
-			}, ...this.slices]
-		}
-		// Spacer slice
-		this.slices = [{
-			slice_type: 'spacer',
-			slice_label: null,
-			items: [],
-			primary: {
-				pixels:100
+				pixels:50
 			}
 		}, ...this.slices]
 
@@ -535,6 +430,7 @@ export default {
 		if (this.homeDetails.threeD_tour) {
 			this.slices = [{
 				slice_type: 'embed_section',
+				slice_devider: true,
 				slice_label: null,
 				items: [],
 				primary: {
@@ -555,8 +451,112 @@ export default {
 			slice_label: null,
 			items: [],
 			primary: {
-				pixels:100
+				pixels:50
 			}
+		}, ...this.slices]
+
+		// Amenities slice
+		if(this.homeDetails.amenitiesArray != undefined && this.homeDetails.amenitiesArray.length > 0) {
+			this.slices = [{
+				slice_type: 'image_gallery',
+				slice_label: 'icons',
+				slice_devider: true,
+				background: this.homeDetails.amenities_background_color,
+				items: this.homeDetails.amenitiesArray,
+				primary: {
+					gallery_title: [
+						{
+							spans: [],
+							text:"Amenities",
+							type:"heading2"
+						}
+					]
+				}
+			}, ...this.slices]
+		}
+	
+		// Spacer slice
+		this.slices = [{
+			slice_type: 'spacer',
+			slice_label: null,
+			items: [],
+			primary: {
+				pixels:50
+			}
+		}, ...this.slices]
+
+		// Room mates slice
+		if(this.homeDetails.housemates && this.homeDetails.housematesArray != undefined &&  this.homeDetails.housematesArray.length > 0) {
+			this.slices = [{
+				isBuildingPage:"Yes",
+				slice_type: 'image_gallery',
+				slice_label: 'avatars',
+				slice_devider: true,
+				items: this.homeDetails.housematesArray,
+				primary: {
+					gallery_title: [
+						{
+							spans: [],
+							text:"Housemates",
+							type:"heading2"
+						}
+					]
+				}
+			}, ...this.slices]
+		}
+		
+		// Spacer slice
+		this.slices = [{
+			slice_type: 'spacer',
+			slice_label: null,
+			items: [],
+			primary: {
+				pixels:50
+			}
+		}, ...this.slices]
+
+		// Rooms slice
+		if(this.homeDetails.roomsArray != undefined && this.homeDetails.roomsArray.length > 0) {
+			this.slices = [{
+				primary:{
+					title: [{
+						spans: [],
+						text:"Select Your Room",
+						type:"heading2"
+					}]
+				},
+				slice_type: 'rooms',
+				slice_devider: true,
+				room_image: this.homeDetails.room_image,
+				background: this.homeDetails.rooms_background_color,
+				slice_label: null,
+				items: this.homeDetails.roomsArray,
+			}, ...this.slices]
+		}
+		
+		// Spacer slice
+				this.slices = [{
+					slice_type: 'spacer',
+					slice_label: null,
+					items: [],
+					primary: {
+						pixels:50
+					}
+				}, ...this.slices]
+
+				
+		// Home details slice
+		this.slices = [{
+			slice_type: 'form',
+			slice_label: 'homedetails',
+			homeID: this.$route.params.uid,
+			OperatorID: this.homeDetails.operatorId,
+			neighborhoodId: this.homeDetails.neighborhoodId,
+			buildingId: this.homeDetails.buildingId,
+			homeName: this.homeDetails.name,
+			cityName: this.homeDetails.cityName,
+			cityID: this.homeDetails.cityId,
+			sideFormBackgroundColor: this.homeDetails.side_form_background_color
 		}, ...this.slices]
 	},
 	fetchOnServer: false
@@ -587,12 +587,9 @@ h3 {
     font-size: 38px;
 }
 .home-detail .home-detail-slider .home-detail-slider-content {
-	margin-top: -210px;
-	background-color: rgba(244, 244, 245, 0.9);
 	z-index: 99;
 	position: relative;
-	padding: 20px 70px 35px 70px;
-	margin-bottom: 100px;
+	margin-bottom: 50px;
 }
 .icons-details .icon-wrap svg{
 	color: rgb(114, 191, 68);
@@ -627,6 +624,11 @@ h3 {
 	margin-bottom: 0;
 	margin-right: 5px;
 }
+.home-detail .home-detail-slider .icons-details .icon {
+	background: #f5f5f5;
+    border-radius: 5px;
+    padding: 5px 5px 0px 10px;
+}
 .home-detail .home-detail-slider .icons-details .icon ,
 .home-detail .home-detail-slider .icons-details .desc {
 	display: -webkit-box;
@@ -645,7 +647,7 @@ h3 {
 	margin-left: 10px;
 }
 .home-detail .home-detail-slider .icons-details  {
-	margin-top: 25px;
+	/* margin-top: 25px; */
 }
 .home-detail .home-detail-slider .build-desc p {
 	margin-bottom: 0;

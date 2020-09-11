@@ -55,6 +55,7 @@
           </template>
         </div>
       </div>
+      <hr v-if="slice.slice_devider != undefined && slice.slice_devider === true"/>
     </section>
   </div>
 </template>

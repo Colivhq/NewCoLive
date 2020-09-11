@@ -8,6 +8,7 @@
       <!-- This here is the code to get the form. Currently is is not execuring the code, it's just pringint it on the screen-->
       <prismic-rich-text :field="slice.primary.embed_html"/>
     </div>
+    <hr v-if="slice.slice_devider != undefined && slice.slice_devider === true"/>
   </div>
 </template>
 

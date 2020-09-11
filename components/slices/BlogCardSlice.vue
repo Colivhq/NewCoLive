@@ -38,7 +38,7 @@
                 </div> 
                 <div class="row view-more-blogs" v-if="slice.primary.blog_link.length != 0">
                     <div class="col-lg-12">
-                        <prismic-link :field="slice.primary.blog_link" class="more-blog-link">
+                        <prismic-link v-if="slice.primary.blog_link[0].spans.length !=0" :field="slice.primary.blog_link[0].spans[0].data" class="more-blog-link">
                             {{ slice.primary.blog_link[0].text }}
                         </prismic-link>
                     </div>
@@ -229,6 +229,9 @@ export default {
     }
     .view-more-blogs {
         text-align: center;
+    }
+    .view-more-blogs a{ 
+        font-size: 26px;
     }
 }
 @media (max-width: 575px) {
