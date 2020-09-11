@@ -10,30 +10,26 @@
     background-color: #f4f4f5;
 }
 .form-cms-build .input-group .input-group-text {
-    background-color: #f55e61;
+    background-color: var(--sideFormBackgroundColor);
     border-color: #f55e61;
     border-radius: 0;
     padding: 0 15px;
     font-size: 12px;
-    color: #fff;
     height: 38px;
 }
 .form-cms-build .form-inputs {
-    border-color: #f55e61;
+    border-color: var(--sideFormBackgroundColor);
     border-radius: 0;
-    color: #f55e61;
     font-size: 13px;
     height: 38px;
 }
 .form-cms-build .form-textarea {
     border-color: #f55e61;
     border-radius: 0;
-    color: #f55e61;
     font-size: 13px;
 }
 .form-cms-build input.form-inputs::placeholder,
 .form-cms-build textarea::placeholder {
-    color: #f55e61;
     font-size: 13px;
 }
 .form-cms-build .form-group {
@@ -44,7 +40,6 @@
     margin-bottom: 0px;
 }
 .form-cms-build .custom-control-label {
-    color: #f55e61;
     font-size: 13px;
     vertical-align: middle;
     outline: 0;
@@ -53,7 +48,7 @@
     margin-top: 10px;
 }
 .form-cms-build .submit-btn button {
-    background-color: #f55e61;
+    background-color: var(--sideFormBackgroundColor);
     border: none;
     font-size: 18px;
     max-width: 175px;
@@ -73,7 +68,7 @@
     border-radius: 0;
     content: '';
     -webkit-appearance: none;
-    background-color: #f55e61;
+    background-color: var(--sideFormBackgroundColor);
     border: none;
     padding: 10px;
     display: inline-block;
@@ -98,18 +93,18 @@
 }
 .form-cms-build .custom-checkbox .custom-control-input:checked ~ .custom-control-label::after {
     background-image: none;
-    border: solid #ffffff;
+    border: solid #495057;
     border-width: 0 2px 2px 0;
 }
 .form-cms-build .custom-control-input:focus:not(:checked) ~ .custom-control-label::before {
     box-shadow: none;
 }
 .form-cms-build .custom-control-input:not(:disabled):active ~ .custom-control-label::before {
-    background-color: #f55e61;
-    border-color: #f55e61;
+    background-color: var(--sideFormBackgroundColor);
+    border-color: var(--sideFormBackgroundColor);
 }
 .form-cms-build .comment-label legend{
-    background-color: #f55e61;
+    background-color: var(--sideFormBackgroundColor);
     border-color: #f55e61;
     border-radius: 0;
     padding: 10px 15px !important;

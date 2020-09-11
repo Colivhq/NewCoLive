@@ -2,7 +2,7 @@
     <section :style="{ 'background-color': slice.primary.background }">
         <div class="inner-content-wrapper" >
             <div class="cms-main-wrap blog-cms">
-            <prismic-rich-text :field="slice.primary.title" class="topic-heading"/>
+                <prismic-rich-text :field="slice.primary.title" class="topic-heading"/>
                 <div class="blog-card row">
                     <div v-for="item in blogList" :key="item.id" class="card-main col-lg-4 col-sm-6 col-xs-12">
                         <div class="content-wrap">
@@ -36,6 +36,13 @@
                         </div> 
                     </div>
                 </div> 
+                <div class="row view-more-blogs" v-if="slice.primary.blog_link.length != 0">
+                    <div class="col-lg-12">
+                        <prismic-link v-if="slice.primary.blog_link[0].spans.length !=0" :field="slice.primary.blog_link[0].spans[0].data" class="more-blog-link">
+                            {{ slice.primary.blog_link[0].text }}
+                        </prismic-link>
+                    </div>
+                </div>
             </div>
         </div> 
     </section>
@@ -87,6 +94,15 @@ export default {
 </script>
 
 <style scoped>
+.view-more-blogs a{ 
+    font-size: 28px;
+    text-decoration: underline;
+}
+.view-more-blogs {
+    padding-top: 50px;
+    padding-bottom: 50px;
+    text-align: left;
+}
 .topic-heading {
     margin-bottom: 50px;
     text-align: left;
@@ -222,6 +238,12 @@ export default {
     }
     .build-page .blog-card {
         padding-top: 0;
+    }
+    .view-more-blogs {
+        text-align: center;
+    }
+    .view-more-blogs a{ 
+        font-size: 26px;
     }
 }
 @media (max-width: 575px) {

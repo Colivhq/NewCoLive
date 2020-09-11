@@ -6,7 +6,14 @@
                         <b-form @submit="onSubmit">
                             <div class="row">
                                 <b-form-group class="col-lg-12 col-md-12 col-sm-12">
-                                    <b-input-group prepend-html="FIRST<br/>NAME" class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                    <b-input-group class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                        <template v-slot:prepend>
+                                            <b-input-group-text
+                                                :style="{'background-color': sideFormBackgroundColor,
+                                                    'border-color': sideFormBackgroundColor}" >
+                                                FIRST<br/>NAME
+                                            </b-input-group-text>
+                                        </template>
                                         <b-form-input
                                             id="first_name"
                                             v-model="form.firstName"
@@ -14,67 +21,111 @@
                                             type="text"
                                             class="form-inputs"
                                             required
+                                            :style="{'border-color': sideFormBackgroundColor, '--sideFormBackgroundColor': sideFormBackgroundColor}"
                                         ></b-form-input>
                                     </b-input-group>
                                 </b-form-group>
                                 <b-form-group class="col-lg-12 col-md-12 col-sm-12">
-                                    <b-input-group prepend-html="LAST<br/>NAME" class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                    <b-input-group class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                         <template v-slot:prepend>
+                                            <b-input-group-text 
+                                                :style="{'background-color': sideFormBackgroundColor,
+                                                    'border-color': sideFormBackgroundColor}" >
+                                               LAST <br>NAME
+                                            </b-input-group-text>
+                                        </template>
                                         <b-form-input
                                             id="last_name"
                                             placeholder="Required Field"
                                             v-model="form.lastName"
                                             type="text"
                                             class="form-inputs"
+                                            :style="{'border-color': sideFormBackgroundColor, '--sideFormBackgroundColor': sideFormBackgroundColor}"
                                             required
                                         ></b-form-input>
                                     </b-input-group>
                                 </b-form-group>
                             
                                 <b-form-group class="col-lg-12 col-md-12 col-sm-12">
-                                    <b-input-group prepend-html="PHONE" class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                    <b-input-group class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                        <template v-slot:prepend>
+                                            <b-input-group-text 
+                                                :style="{'background-color': sideFormBackgroundColor,
+                                                    'border-color': sideFormBackgroundColor}" >
+                                               PHONE
+                                            </b-input-group-text>
+                                        </template>
                                         <b-form-input
                                             id="phone_number"
                                             v-model="form.phone"
                                             type="text"
                                             class="form-inputs"
+                                            :style="{'border-color': sideFormBackgroundColor, '--sideFormBackgroundColor': sideFormBackgroundColor}"
                                         ></b-form-input>
                                     </b-input-group>
                                 </b-form-group>
                                 <b-form-group class="col-lg-12 col-md-12 col-sm-12">
-                                    <b-input-group prepend-html="EMAIL" class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                    <b-input-group class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                        <b-input-group-text 
+                                            :style="{'background-color': sideFormBackgroundColor,
+                                                'border-color': sideFormBackgroundColor}" >
+                                            EMAIL
+                                        </b-input-group-text>
                                         <b-form-input
                                             id="email"
                                             v-model="form.email"
                                             type="email"
                                             class="form-inputs"
                                             placeholder="Required Field"
+                                            :style="{'border-color': sideFormBackgroundColor, '--sideFormBackgroundColor': sideFormBackgroundColor}"
                                             required
                                         ></b-form-input>
                                     </b-input-group>
                                 </b-form-group>
                                 <b-form-group class="col-lg-12 col-md-12 col-sm-12">
-                                    <b-input-group prepend-html="START<br/>OF STAY" class="input-group mb-2 mr-sm-2 mb-sm-0">
-                                        <b-form-select id="los" v-model="form.sos" :options="sosOptions" class="form-inputs" required></b-form-select>
+                                    <b-input-group class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                        <b-input-group-text 
+                                            :style="{'background-color': sideFormBackgroundColor,
+                                                'border-color': sideFormBackgroundColor}" >
+                                            START<br/>OF STAY
+                                        </b-input-group-text>
+                                        <b-form-select id="los" v-model="form.sos" :options="sosOptions" class="form-inputs" required :style="{'border-color': sideFormBackgroundColor, '--sideFormBackgroundColor': sideFormBackgroundColor}"></b-form-select>
                                     </b-input-group>
                                 </b-form-group>
                                 <b-form-group class="col-lg-12 col-md-12 col-sm-12">
-                                    <b-input-group prepend-html="LENGTH<br/>OF STAY" class="input-group mb-2 mr-sm-2 mb-sm-0">
-                                        <b-form-select id="los" v-model="form.los" :options="losOptions" class="form-inputs" required></b-form-select>
+                                    <b-input-group class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                        <b-input-group-text 
+                                            :style="{'background-color': sideFormBackgroundColor,
+                                                'border-color': sideFormBackgroundColor}" >
+                                            LENGTH<br/>OF STAY
+                                        </b-input-group-text>
+                                        <b-form-select id="los" v-model="form.los" :options="losOptions" class="form-inputs" required :style="{'border-color': sideFormBackgroundColor, '--sideFormBackgroundColor': sideFormBackgroundColor}"></b-form-select>
                                     </b-input-group>
                                 </b-form-group>
                                 <b-form-group class="col-lg-12 col-md-12 col-sm-12">
-                                    <b-input-group prepend-html="AGE<br/>GROUP" class="input-group mb-2 mr-sm-2 mb-sm-0">
-                                        <b-form-select id="age_group" v-model="form.ageGroup" :options="ageGroupOptions" class="form-inputs" required></b-form-select>
+                                    <b-input-group class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                        <b-input-group-text 
+                                            :style="{'background-color': sideFormBackgroundColor,
+                                                'border-color': sideFormBackgroundColor}" >
+                                            AGE<br/>GROUP
+                                        </b-input-group-text>
+                                        <b-form-select id="age_group" v-model="form.ageGroup" :options="ageGroupOptions" class="form-inputs" required :style="{'border-color': sideFormBackgroundColor, '--sideFormBackgroundColor': sideFormBackgroundColor}"></b-form-select>
                                     </b-input-group>
                                 </b-form-group>
                                 <b-form-group class="col-lg-12 col-md-12 col-sm-12">
-                                    <b-input-group prepend-html="JOB" class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                    <b-input-group class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                        <b-input-group-text 
+                                            :style="{'background-color': sideFormBackgroundColor,
+                                                'border-color': sideFormBackgroundColor}" >
+                                            JOB
+                                        </b-input-group-text>
                                         <b-form-input
                                             id="job_function"
                                             v-model="form.job"
                                             placeholder="Required Field"
                                             class="form-inputs"
                                             type="text"
+                                            :style="{'border-color': sideFormBackgroundColor, '--sideFormBackgroundColor': sideFormBackgroundColor}"
                                             required
                                         ></b-form-input>
                                     </b-input-group>
@@ -85,12 +136,13 @@
                                         v-model="form.status"
                                         :checked="form.status"
                                         name="marketing_update"
+                                        :style="{'border-color': sideFormBackgroundColor, '--sideFormBackgroundColor': sideFormBackgroundColor}"
                                         >
                                         I would like to receive marketing updates from ColivHQ.
                                     </b-form-checkbox>
                                 </b-form-group>
                                 <div class="col-sm-12 text-center submit-btn">
-                                    <b-button type="submit" :disabled="form.isActive" class="pt-2 pb-2" variant="primary">SUBMIT</b-button>
+                                    <b-button type="submit" :style="{'background-color': sideFormBackgroundColor, 'border-color': sideFormBackgroundColor}" :disabled="form.isActive" class="pt-2 pb-2" variant="default">SUBMIT</b-button>
                                 </div>
                             </div>
                         </b-form>
@@ -106,16 +158,20 @@
                             <b-form-group class="col-lg-12 col-md-12 col-sm-12 mx-auto">
                                 <b-input-group class="input-group mb-2 mr-sm-2 mb-sm-0">
                                     <template v-slot:prepend>
-                                        <b-input-group-text class="text-wrap px-2">
-                                            FIRST NAME
+                                         <b-input-group-text
+                                            :style="{'background-color': sideFormBackgroundColor,
+                                                'border-color': sideFormBackgroundColor}" >
+                                            FIRST<br/>NAME
                                         </b-input-group-text>
                                     </template>
+                                    
                                     <b-form-input
                                         id="first_name"
                                         v-model="form.firstName"
                                         placeholder="Required Field"
                                         type="text"
                                         class="form-inputs"
+                                        :style="{'border-color': sideFormBackgroundColor, '--sideFormBackgroundColor': sideFormBackgroundColor}"
                                         required
                                     ></b-form-input>
                                 </b-input-group>
@@ -123,8 +179,9 @@
                             <b-form-group class="col-lg-12 col-md-12 col-sm-12 mx-auto">
                                 <b-input-group class="input-group mb-2 mr-sm-2 mb-sm-0">
                                     <template v-slot:prepend>
-                                        <b-input-group-text class="text-wrap px-2">
-                                            LAST NAME
+                                        <b-input-group-text class="text-wrap px-2"
+                                        :style="{'background-color': sideFormBackgroundColor, 'border-color': sideFormBackgroundColor}">
+                                            LAST<br/> NAME
                                         </b-input-group-text>
                                     </template>
                                     <b-form-input
@@ -133,6 +190,7 @@
                                         v-model="form.lastName"
                                         type="text"
                                         class="form-inputs"
+                                        :style="{'border-color': sideFormBackgroundColor, '--sideFormBackgroundColor': sideFormBackgroundColor}"
                                         required
                                     ></b-form-input>
                                 </b-input-group>
@@ -141,7 +199,7 @@
                             <b-form-group class="col-lg-12 col-md-12 col-sm-12 mx-auto">
                                 <b-input-group class="input-group mb-2 mr-sm-2 mb-sm-0">
                                     <template v-slot:prepend>
-                                        <b-input-group-text class="text-wrap px-2">
+                                        <b-input-group-text class="text-wrap px-2" :style="{'background-color': sideFormBackgroundColor, 'border-color': sideFormBackgroundColor}">
                                             PHONE
                                         </b-input-group-text>
                                     </template>
@@ -150,13 +208,14 @@
                                         v-model="form.phone"
                                         type="text"
                                         class="form-inputs"
+                                        :style="{'border-color': sideFormBackgroundColor, '--sideFormBackgroundColor': sideFormBackgroundColor}"
                                     ></b-form-input>
                                 </b-input-group>
                             </b-form-group>
                             <b-form-group class="col-lg-12 col-md-12 col-sm-12 mx-auto">
                                 <b-input-group class="input-group mb-2 mr-sm-2 mb-sm-0">
                                     <template v-slot:prepend>
-                                        <b-input-group-text class="text-wrap px-2">
+                                        <b-input-group-text class="text-wrap px-2" :style="{'background-color': sideFormBackgroundColor, 'border-color': sideFormBackgroundColor}">
                                             EMAIL
                                         </b-input-group-text>
                                     </template>
@@ -166,6 +225,7 @@
                                         type="email"
                                         class="form-inputs"
                                         placeholder="Required Field"
+                                        :style="{'border-color': sideFormBackgroundColor, '--sideFormBackgroundColor': sideFormBackgroundColor}"
                                         required
                                     ></b-form-input>
                                 </b-input-group>
@@ -173,37 +233,37 @@
                             <b-form-group class="col-lg-12 col-md-12 col-sm-12 mx-auto">
                                 <b-input-group class="input-group mb-2 mr-sm-2 mb-sm-0">
                                     <template v-slot:prepend>
-                                        <b-input-group-text class="text-wrap px-2">
+                                        <b-input-group-text class="text-wrap px-2" :style="{'background-color': sideFormBackgroundColor, 'border-color': sideFormBackgroundColor}">
                                             START OF STAY
                                         </b-input-group-text>
                                     </template>
-                                    <b-form-select id="los" v-model="form.sos" :options="sosOptions" class="form-inputs" required></b-form-select>
+                                    <b-form-select id="los" v-model="form.sos" :options="sosOptions" class="form-inputs" required :style="{'border-color': sideFormBackgroundColor, '--sideFormBackgroundColor': sideFormBackgroundColor}"></b-form-select>
                                 </b-input-group>
                             </b-form-group>
                             <b-form-group class="col-lg-12 col-md-12 col-sm-12 mx-auto">
                                 <b-input-group class="input-group mb-2 mr-sm-2 mb-sm-0">
                                     <template v-slot:prepend>
-                                        <b-input-group-text class="text-wrap px-2">
+                                        <b-input-group-text class="text-wrap px-2" :style="{'background-color': sideFormBackgroundColor, 'border-color': sideFormBackgroundColor}">
                                             LENGTH OF STAY
                                         </b-input-group-text>
                                     </template>
-                                    <b-form-select id="los" v-model="form.los" :options="losOptions" class="form-inputs" required></b-form-select>
+                                    <b-form-select id="los" v-model="form.los" :options="losOptions" class="form-inputs" required :style="{'border-color': sideFormBackgroundColor, '--sideFormBackgroundColor': sideFormBackgroundColor}"></b-form-select>
                                 </b-input-group>
                             </b-form-group>
                             <b-form-group class="col-lg-12 col-md-12 col-sm-12 mx-auto">
                                 <b-input-group class="input-group mb-2 mr-sm-2 mb-sm-0">
                                     <template v-slot:prepend>
-                                        <b-input-group-text class="text-wrap px-2">
+                                        <b-input-group-text class="text-wrap px-2" :style="{'background-color': sideFormBackgroundColor, 'border-color': sideFormBackgroundColor}">
                                             AGE GROUP
                                         </b-input-group-text>
                                     </template>
-                                    <b-form-select id="age_group" v-model="form.ageGroup" :options="ageGroupOptions" class="form-inputs" required></b-form-select>
+                                    <b-form-select id="age_group" v-model="form.ageGroup" :options="ageGroupOptions" class="form-inputs" required :style="{'border-color': sideFormBackgroundColor, '--sideFormBackgroundColor': sideFormBackgroundColor}"></b-form-select>
                                 </b-input-group>
                             </b-form-group>
                             <b-form-group class="col-lg-12 col-md-12 col-sm-12 mx-auto">
                                 <b-input-group class="input-group mb-2 mr-sm-2 mb-sm-0">
                                     <template v-slot:prepend>
-                                        <b-input-group-text class="text-wrap px-2">
+                                        <b-input-group-text class="text-wrap px-2" :style="{'background-color': sideFormBackgroundColor, 'border-color': sideFormBackgroundColor}">
                                             JOB
                                         </b-input-group-text>
                                     </template>
@@ -213,6 +273,7 @@
                                         placeholder="Required Field"
                                         class="form-inputs"
                                         type="text"
+                                        :style="{'border-color': sideFormBackgroundColor, '--sideFormBackgroundColor': sideFormBackgroundColor}"
                                         required
                                     ></b-form-input>
                                 </b-input-group>
@@ -223,12 +284,13 @@
                                     v-model="form.status"
                                     :checked="form.status"
                                     name="marketing_update"
+                                    :style="{'border-color': sideFormBackgroundColor, '--sideFormBackgroundColor': sideFormBackgroundColor}"
                                     >
                                     I would like to receive marketing updates from ColivHQ.
                                 </b-form-checkbox>
                             </b-form-group>
                             <div class="col-sm-12 text-center submit-btn">
-                                <b-button type="submit" :disabled="form.isActive" class="pt-2 pb-2" variant="primary">SUBMIT</b-button>
+                                <b-button type="submit" :style="{'background-color': sideFormBackgroundColor, 'border-color': sideFormBackgroundColor}" :disabled="form.isActive" class="pt-2 pb-2" variant="default">SUBMIT</b-button>
                             </div>
                         </div>
                     </b-form>
@@ -244,6 +306,7 @@ export default {
     props: ['slice'],
     data() {
         return {
+            sideFormBackgroundColor: this.slice.sideFormBackgroundColor,
             form: {
                 city: '',
                 area: null,

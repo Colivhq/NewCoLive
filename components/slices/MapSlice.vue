@@ -2,7 +2,7 @@
     <div class="google-map" :id="mapName"></div>
 </template>
 <script>
-    import mapJson from '@/custom_types/GoogleMap.json'
+    //import mapJson from '@/custom_types/GoogleMap.json'
     export default {
     name: 'google-map',
     props: ['slice'],
@@ -25,8 +25,8 @@
             map: null,
             bounds: null,
             markers: [],
-            markerIcon: this.slice.primary.marker.url,
-            mapStyleJson: mapJson
+            markerIcon: this.slice.primary.marker.url
+            //mapStyleJson: mapJson
         }
     },
     mounted: function () {
