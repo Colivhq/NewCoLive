@@ -63,13 +63,25 @@ export default {
             //this.blogList1 = response.results
             for (let blog of Object.values(response.results)) { 
                 if(blog.uid != this.slice.current_blog && this.blogList.length <= this.slice.primary.card_limit) {
-                    let topic = (await this.$store.dispatch('fetchAuthor', 'topics')).results
-                    blog.data.topics = topic
+                    let topicArray = await this.getTopics(blog)
+                    blog.data.topics = topicArray.length ? topicArray.slice(0, 3) : []
                     this.blogList.push(blog)
                 }
             }
             this.blogList = this.blogList.slice(0, this.slice.primary.card_limit)
         });
+    },
+    methods: {
+        async getTopics (blog) {
+            let topicArray = []
+            for (let i = 0; i < blog.data.topics1.length; i++) {
+                if (blog.data.topics1[i] && typeof blog.data.topics1[i].topic == 'object' && blog.data.topics1[i].topic.id) {
+                    let topic = await this.$prismic.api.query(this.$prismic.predicates.at('document.id', blog.data.topics1[i].topic.id))
+                    topicArray.push(topic.results[0])
+                }
+            }
+            return topicArray
+        }
     }
 }
 </script>

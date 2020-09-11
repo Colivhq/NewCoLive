@@ -43,7 +43,7 @@ const mainStore = () => {
 			},
 			async fetchAuthor ({},payload) {
 				try {
-					let resp = await this.$prismic.api.query(this.$prismic.predicates.at('document.type', payload))
+					let resp = await this.$prismic.api.query(this.$prismic.predicates.at('document.id', payload))
 					return resp
 				} catch (error) {
 					commit('SET_ERROR', error);

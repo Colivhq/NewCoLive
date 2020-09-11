@@ -63,9 +63,10 @@
                       aria-haspopup="true"
                       aria-expanded="false"></i>
                     <template v-if="slice.items.length >= 1">
-                      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <div class="dropdown-menu" aria-labelledby="navbarDropdown" :style="background">
                         <template v-for="(item, index) in slice.items">
-                          <prismic-link :field="item.sub_nav_link" :key="'header-item-' + index"  class="menu-subtitle dropdown-item">
+                          <prismic-link :field="item.sub_nav_link" :key="'header-item-' + index"
+                            class="menu-subtitle dropdown-item">
                             <!-- {{ $prismic.richTextAsPlain(item.sub_nav_label) }} -->
                             {{item.sub_nav_label}}
                           </prismic-link>
@@ -92,6 +93,7 @@ export default {
   name: 'header-prismic',
   data () {
     return {
+      hovered: false,
       slices: [],
       fields: {
         header: {
@@ -172,12 +174,51 @@ export default {
                   'color': this.fields.header.text_color
                 }
             }
+        }
+    },
+    background(){
+      if (this.fields.header.background_color) {
+        if(/^#([A-Fa-f0-9]{3}){1,2}$/.test(this.fields.header.background_color)) { 
+          // Getting the content after '#',
+          let ret = this.fields.header.background_color.slice(1); 
+          // Splitting each character 
+          ret = ret.split(''); 
+                  
+          // Checking if the length is 3 
+          // then make that 6 
+          if(ret.length == 3) { 
+              var ar = []; 
+              ar.push(ret[0]);  
+              ar.push(ret[0]); 
+              ar.push(ret[1]); 
+              ar.push(ret[1]); 
+              ar.push(ret[2]); 
+              ar.push(ret[2]); 
+              ret = ar; 
+          } 
+          ret = '0x'+ ret.join(''); 
+                  
+          var r = (ret>>16)&255;   
+          var g = (ret>>8)&255;  
+          var b = ret&255; 
+          let color = 'rgba('+[r, g, b].join(',')+',' + 0.9 + ')';
+          return {
+            'background-color': color,
+            'border': '1px solid ' + this.fields.header.text_color,
+            'color': this.fields.header.text_color
+          }
+        }
       }
     },
     button () {
       return {
         'border': '2px solid ' + this.fields.header.text_color,
         'color':  this.fields.header.text_color
+      }
+    },
+    hoverClass() {
+      return {
+        'color': 'red'
       }
     }
   },
@@ -452,6 +493,7 @@ export default {
   }
   .site-header .header-menu .navbar-nav .dropdown-menu {
     background-color: transparent;
+    border: none  !important;
   }
   .site-header .header-menu .navbar-expand-lg .navbar-nav .dropdown-menu .menu-subtitle {
     color: #ddd;
@@ -473,6 +515,7 @@ export default {
   }
 }
 @media(max-width:575px) {
+
   .site-header .header-menu {
     position: absolute;
     top: 50%;

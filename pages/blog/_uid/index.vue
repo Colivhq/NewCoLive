@@ -35,7 +35,7 @@
 						</div>
 					</div> -->
 				</div>
-				<div class="blog-topics">
+				<div class="blog-topics" v-if="topics_array && topics_array.length">
 					<p class="topic" v-for="topic in topics_array" :key="topic.topic">
 						<a :href="topic.href">
 							{{topic.data.topic}}
@@ -61,10 +61,31 @@
 				</div>
 				<!-- Sharing icons for : END -->
 				<prismic-rich-text  class="build-desc blog_body" :field="blog_body"/>
+
+				<!-- TOC -->
+				<div class="table-of-content ml-lg-3" v-if="blog_body != ''">
+					<div class="toc-content-container" :style="{'border-left': `6px solid`+ toc_accent_color, 'background-color': toc_background_color}">
+						<div class="font-weight-bold f-12 mb-2"> Contents </div>
+						<div class="content-container">
+							<div class="heading2-container px-2 p-lg-0" v-for="(content, tocIndex) in toc" :key="tocIndex">
+								<div class="my-2 line-height-h2">
+									<a class="f-12" :href="'#' + getId(content)"> {{content.text}} </a>
+								</div>
+								<div v-for="(heading3, ind) in content.heading3" :key="ind" class="heading3">
+									<div class="ml-1 line-height">
+										<a :href="'#' + getId(heading3)" class="f-10 content-sublink">
+											&bull; {{heading3.text}}
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 
 			<!-- Author box -->
-			<div v-if="author" class="author_box" :style="{'border-left': `6px solid`+ toc_accent_color, 'background-color': toc_background_color}">
+			<div v-if="author && Object.keys(author).length" class="author_box" :style="{'border-left': `6px solid`+ toc_accent_color, 'background-color': toc_background_color}">
 				<h2>About the author</h2>
 				<b-row>
 					<b-col cols="12" md="2">
@@ -102,6 +123,42 @@ export default {
 		return {
 			socialShareStickyHeight: 0,
 			author: null
+		}
+	},
+	mounted () {
+		let headingArray = document.getElementsByTagName('h2')
+		let headingThreeArray = document.getElementsByTagName('h3')
+		if (headingArray && headingArray.length) {
+			for (let index = 0; index < headingArray.length; index++) {
+				let str = headingArray[index].textContent.split(" ").join("")
+				headingArray[index].setAttribute("id", str);
+			}
+		}
+		if (headingThreeArray && headingThreeArray.length) {
+			for (let index = 0; index < headingThreeArray.length; index++) {
+				let str = headingThreeArray[index].textContent.split(" ").join("")
+				headingThreeArray[index].setAttribute("id", str);
+			}
+		}
+
+	},
+	computed:{
+		toc () {
+			let tocArray = []
+			this.document.blog_body.forEach((content, index) => {
+				if (content.type == 'heading2') {
+					tocArray.push(content)
+				}
+				if (content.type == 'heading3') {
+					if ('heading3' in tocArray[tocArray.length - 1]) {
+						tocArray[tocArray.length - 1]['heading3'].push(content)
+					} else {
+						tocArray[tocArray.length - 1]['heading3'] = []
+						tocArray[tocArray.length - 1]['heading3'].push(content)
+					}
+				}
+			})
+			return tocArray
 		}
 	},
 	head () {
@@ -177,10 +234,26 @@ export default {
 	},
   	async asyncData({ $prismic, params, error, store }) {
 		try{
+			let author = {}
+			let topicArray = []
 		// Query to get post content
 			const document = (await $prismic.api.getByUID('blogpage', params.uid)).data
-			let author = await store.dispatch('fetchAuthor', document.author.type)
+
+			if (document.author.id) {
+				author = (await store.dispatch('fetchAuthor', document.author.id))
+			}
 			let topic = (await store.dispatch('fetchAuthor', 'topics')).results
+
+			// topic array
+			if (document.topics1 && document.topics1.length) {
+				for(let i = 0; i < 3; i++) {
+					if (document.topics1[i] && document.topics1[i].topic && document.topics1[i].topic.id) {
+						let topic = await $prismic.api.query($prismic.predicates.at('document.id', document.topics1[i].topic.id))
+						topicArray.push(topic.results[0])
+					}
+				}
+			}
+
 			let logo = (await $prismic.api.getSingle('menu')).data.logo
 			const selSlice = document.body.filter(function(slice) {                
 				if(slice.slice_type == 'blog_cards') {
@@ -202,7 +275,7 @@ export default {
 				},
 
 				// topics
-				topics_array: topic,
+				topics_array: topicArray,
 
 				// author
 				author: author.results[0],
@@ -272,10 +345,59 @@ export default {
         moment: function (date) {
 			return moment(date).format('DD-MM-YYYY');
         }
+	},
+	methods: {
+		getId (article) {
+			return article.text.split(" ").join("")
+		}
 	}
 }
 </script>
 <style>
+
+.topic-href, .topic-href:hover {
+	text-decoration: none;
+}
+
+.f-12 {
+	font-size: 12px;
+}
+
+.f-10 {
+	font-size: 10px;
+}
+
+.line-height {
+	line-height: 15px;
+}
+
+.line-height .content-sublink {
+	line-height: 15px !important;
+}
+
+.heading3 .line-height a{
+	color: #000;
+	text-decoration: none;
+}
+
+.line-height-h2, .line-height-h2 a{
+	line-height: 15px;
+	text-decoration: none;
+	color: #000;
+}
+
+.heading3 .line-height a:hover,  .line-height-h2 a:hover  {
+	color: #91278F;
+	text-decoration: underline;
+}
+
+.toc-content-container {
+	position: sticky;
+	padding:1rem;
+	top: 100px;
+	width: 150px;
+}
+
 /* Slider Bottom */
 .blog .blog-slider .blog-title h1 {
 	font-weight: bold;
@@ -426,6 +548,11 @@ export default {
 	}
 }
 @media(max-width: 991px){
+
+	.toc-content-container {
+		padding: 10px;
+	}
+
 	.social-share-items span {
 		margin-right: 4px;
 		margin-bottom: 0;
@@ -443,5 +570,39 @@ export default {
 		top: auto;
     	bottom: 0;
 	}
+
+	.blog .blog-slider .blog-slider-content-outer .table-of-content {
+		top: 0;
+		display: block;
+		width: 100%;
+		position: relative;
+		margin-left: 15px;
+	}
+}
+
+@media(max-width: 480px) {
+	.blog-slider-content-outer {
+		display: flex;
+		flex-direction: column-reverse;
+	}
+
+	.toc-content-container {
+		padding: 1rem;
+		width: 90vw;
+	}
+
+	.toc-content-container .content-container {
+		display: flex;
+		flex-wrap: wrap;
+	}
+
+	.heading2-container {
+		width: 100%;
+	}
+
+	.heading2-container .heading3{
+		padding: 0px;
+	}
+
 }
 </style>	
