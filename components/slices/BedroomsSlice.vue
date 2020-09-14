@@ -4,7 +4,7 @@
             <div class="main-part">
                 <div class="section-main-title" ><prismic-rich-text :field="slice.primary.title" class="cms-title"/></div>
                 <div class="room-card">
-                    <div class="row new-room-box" style="display:none">
+                    <div class="row new-room-box">
                         <div class="col-sm-4" v-for="(item, item_index) in slice.items" :key="item.roomId">
                             <div class="room-image">
                                 <carousel 
@@ -56,7 +56,7 @@
                             </div>
                         </div>
                     </div>
-                    <div v-for="(item, item_index) in slice.items" :key="item.roomId" class="room-wrapper" >
+                    <div v-for="(item, item_index) in slice.items" :key="item.roomId" class="room-wrapper" style="display:none" >
                         <div class="room-image">
                             <carousel 
                                 v-if="slice.room_image && slice.room_image.toLowerCase() === 'slider'"
@@ -465,9 +465,9 @@ const FindaHomeSideForm = () => import("../forms/FindaHomeSideForm.vue");
     right: 10px;
 }
 .new-room-box .room-image .overlay :first-child {
-    background-color: #f1eaef;
+    background-color: #ef5357;
     border: 1px solid #ef5357;
-    color: #000;
+    color: #ffffff;
     padding: 0 10px;
     margin-bottom: 0;
     display: inline-block;

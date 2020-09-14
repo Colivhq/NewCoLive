@@ -4,36 +4,50 @@
             <div class="cms-main-wrap blog-cms">
                 <prismic-rich-text :field="slice.primary.title" class="topic-heading"/>
                 <div class="blog-card row">
-                    <div v-for="item in blogList" :key="item.id" class="card-main col-lg-4 col-sm-6 col-xs-12">
-                        <div class="content-wrap">
-                            <n-link :to="'/blog/'+item.uid" class="card-link">
-                            <!-- <prismic-link :field="item.blog_link" class="card-link"> -->
-                                <picture>
-                                    <img :src="item.data.hero_image.card.url">
-                                </picture>
-                                <div class="desc-box">
-                                    <div class="desc">
-                                        {{ item.data.publish_date | moment }}
-                                    </div>
-                                    <div class="name"> {{ item.data.page_title[0].text }} </div>
-                                    <div class="desc">
-                                        <p>{{ (item.data.summary[0].text.length > 170) ? item.data.summary[0].text.substring(0, 167) + '...' : item.data.summary[0].text }}</p>
-                                    </div>
-                                    <div class="blog-bottom-content">
-                                        <div class="blog-topics">
-                                            <p class="topic" v-for="topic in item.data.topics" :key="topic.topic">
-                                                <span class="topic-content">
-                                                    <a :href="topic.href">
-                                                        {{topic.data.topic}}
-                                                    </a>
-                                                </span>
-                                            </p>
+                    <div :class="[ topics_and_authors ? 'col-lg-10': 'col-lg-12']">
+                        <div class="row">
+                            <div v-for="item in blogList" :key="item.id" class="card-main col-lg-4 col-sm-6 col-xs-12">
+                                <div class="content-wrap">
+                                    <n-link :to="'/blog/'+item.uid" class="card-link">
+                                    <!-- <prismic-link :field="item.blog_link" class="card-link"> -->
+                                        <picture>
+                                            <img :src="item.data.hero_image.card.url">
+                                        </picture>
+                                        <div class="desc-box">
+                                            <div class="desc">
+                                                {{ item.data.publish_date | moment }}
+                                            </div>
+                                            <div class="name"> {{ item.data.page_title[0].text }} </div>
+                                            <div class="desc">
+                                                <p>{{ (item.data.summary[0].text.length > 170) ? item.data.summary[0].text.substring(0, 167) + '...' : item.data.summary[0].text }}</p>
+                                            </div>
+                                            <div class="blog-bottom-content">
+                                                <div class="blog-topics">
+                                                    <p class="topic" v-for="topic in item.data.topics" :key="topic.topic">
+                                                        <span class="topic-content">
+                                                            <a :href="topic.href">
+                                                                {{topic.data.topic}}
+                                                            </a>
+                                                        </span>
+                                                    </p>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
-                            <!-- </prismic-link> -->
-                            </n-link>
-                        </div> 
+                                    <!-- </prismic-link> -->
+                                    </n-link>
+                                </div> 
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 blog-filter-topics" v-if="topics_and_authors">
+                        <h3>Topics</h3>
+                        <div class="blog-topics">
+                            <p class="topic" v-for="(topic, index) in topicList" :key="'fil_top_'+index" @click="topicFilter(index)">
+                                <span class="topic-content">
+                                    {{index}} ({{topic}})
+                                </span>
+                            </p>
+                        </div>
                     </div>
                 </div> 
                 <div class="row view-more-blogs" v-if="slice.primary.blog_link.length != 0">
@@ -55,7 +69,10 @@ export default {
     name: 'blog-cards',
     data() {
         return {
-            blogList: []
+            blogList: [],
+            blogListCopy: [],
+            topicList:[],
+            topics_and_authors: true,
         }
     },
     filters: {
@@ -72,10 +89,19 @@ export default {
                 if(blog.uid != this.slice.current_blog && this.blogList.length <= this.slice.primary.card_limit) {
                     let topicArray = await this.getTopics(blog)
                     blog.data.topics = topicArray.length ? topicArray.slice(0, 3) : []
+                    var filterTopics = [];
+                    if(topicArray.length) {
+                        topicArray.forEach((content, index) => {
+                            filterTopics.push(content.data.topic)
+                        })
+                    }
+                    blog.data.filtertopics = filterTopics;
                     this.blogList.push(blog)
                 }
             }
             this.blogList = this.blogList.slice(0, this.slice.primary.card_limit)
+            this.blogListCopy = this.blogList.slice(0, this.slice.primary.card_limit)
+            this.topicList = this.topicList.reduce((a,c)=> (a[c]=++a[c]||1,a) ,{});
         });
     },
     methods: {
@@ -87,13 +113,40 @@ export default {
                     topicArray.push(topic.results[0])
                 }
             }
+            topicArray.forEach((content, index) => {
+                this.topicList.push(content.data.topic)
+			})
             return topicArray
+        },
+        topicFilter(topic) {
+            this.blogList = this.blogListCopy.filter((blog) => {
+                if(blog.data.filtertopics.length > 0) {
+                    if(blog.data.filtertopics.includes(topic)) {
+                        return blog;
+                    }
+                }
+            });
         }
     }
 }
 </script>
 
 <style scoped>
+.blog-filter-topics {
+    text-align: left;
+}
+.blog-filter-topics h3{
+    margin-bottom: 0px;
+    font-weight: bold;
+    color: #000;
+}
+.blog-filter-topics .blog-topics .topic {
+    padding-bottom: 25px !important;
+    font-size: 14px !important;
+    font-weight: normal !important;
+    text-align: left !important;
+    cursor: pointer;
+}
 .view-more-blogs a{ 
     font-size: 28px;
     text-decoration: underline;

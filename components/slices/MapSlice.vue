@@ -1,5 +1,10 @@
 <template>
-    <div class="google-map" :id="mapName"></div>
+    <section class="inner-content-wrapper">
+        <div class="section-main-title" v-if="slice.primary.map_title != undefined">
+          <prismic-rich-text :field="slice.primary.map_title" class="cms-title"/>
+        </div>
+        <div class="google-map" :id="mapName"></div>
+    </section>
 </template>
 <script>
     //import mapJson from '@/custom_types/GoogleMap.json'
@@ -61,5 +66,10 @@
         height: 365px;
         margin: 0 auto;
         background: gray;
+    }
+    .section-main-title .cms-title >>> :first-child {
+        color: #222222;
+        margin-bottom: 40px;
+        text-align: left;
     }
 </style>

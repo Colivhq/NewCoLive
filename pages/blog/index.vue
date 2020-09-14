@@ -123,6 +123,14 @@ export default {
       console.log(e)
       error({ statusCode: 404, message: 'Page not found' })
     }
-  }
+  },
+  created () {
+    const isForm = this.slices.filter(function(slice) {                
+      if(slice.slice_type == 'blog_cards') {
+        Object.assign(slice, {type:'blog_listing'});
+      }
+      return slice;
+    });
+  },
 }
 </script>

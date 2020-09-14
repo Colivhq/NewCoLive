@@ -1,12 +1,18 @@
 <template>
-  <div :class="custFullWidth" :style="{'background-color': slice.background}">
+  <div :class="custFullWidth" >
     <section :class="['image-gallery content-section'] + ' ' + [ custFullWidth == 'galley-full-width' ? 'inner-content-wrapper' : '']">
       <div class="cms-main-wrap">
         <div class="section-main-title">
-          <prismic-rich-text :field="slice.primary.gallery_title" class="cms-title"/>
+          <div class="cms-title" v-if="viewMore">
+            <h2>
+              {{ slice.primary.gallery_title[0].text }}
+              <div class="pull-right view-more" @click="showAll()"><i class="fa fa-plus"></i> View All</div>
+            </h2>
+          </div>
+          <prismic-rich-text v-else :field="slice.primary.gallery_title" class="cms-title"/>
         </div>
         <div :class="'gallery row ' + [isGallaryClass ? gallaryClass : '']">
-          <template v-for="(item, index) in slice.items" >
+          <template v-for="(item, index) in galleryItems" >
             <div v-if="slice.slice_label == 'onecol'" v-bind:key="index" class="gallery-item col-lg-12">        
               <prismic-image :field="item.image[slice.slice_label]" class="single-image lazyload"/> <!-- this sets the right image resolution, based on the slice label -->
               <h3><prismic-rich-text :field="item.feature" class="title"/></h3>
@@ -68,17 +74,31 @@ export default {
     return {
       isGallaryClass: false,
       gallaryClass: '',
-      custFullWidth: 'inner-content-wrapper'
+      custFullWidth: 'inner-content-wrapper',
+      expandAll: false,
+      galleryItems: [],
+      viewMore: false,
+    }
+  },
+  methods:  {
+    showAll() {
+       this.galleryItems = this.slice.items;
+       this.viewMore = false;
     }
   },
   beforeMount() {
+    this.galleryItems = this.slice.items;
     if(this.slice.slice_label === 'avatars') {
         this.isGallaryClass = true
         this.gallaryClass = 'galley-custom-avatar'
     } else if(this.slice.slice_label === 'icons') {
+        if(this.slice.items.length > 9) {
+          this.viewMore = true;
+          this.galleryItems= this.slice.items.slice(0, 9);
+        }
         this.isGallaryClass = true
         this.gallaryClass = 'galley-custom-icon'
-        this.custFullWidth = 'galley-full-width'
+        //this.custFullWidth = 'galley-full-width'
     }
   }
 }
@@ -93,6 +113,12 @@ icons (58x58) - three icons per rows, many rows
 avatars (630x630) - as many images per rows as possible, it could go on a second row; align left
  -->
 <style scoped>
+.view-more {
+  font-size: 25px;
+  color: rgb(34, 34, 34) !important;
+  font-weight: 400;
+  cursor: pointer;
+}
 .single-image {
   width: 100%!important;
 }
