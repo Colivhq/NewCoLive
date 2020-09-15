@@ -363,7 +363,8 @@ export default {
 							startingPrice: startingPrice,
 							priceCurrency: priceCurrency,
 							availability: appartment.availability,
-							roomType: roomType
+							roomType: roomType,
+							totalBedrooms: appartment.totalBedrooms
 						})
 					}
 				});
@@ -380,9 +381,10 @@ export default {
 						{
 							spans: [],
 							text:"Similar homes",
-							type:"heading2"
+							type:"heading2",
 						}
-					]
+					],
+					slice_section: 'similar_cards'
 				}
 			}, ...this.slices]
 		}
@@ -407,7 +409,14 @@ export default {
 					},
 					marker: {
 						url: "/mapMarker.png"
-					}
+					},
+					map_title: [
+						{
+							spans: [],
+							text:"Location",
+							type:"heading2"
+						}
+					]
 				},
 				slice_type: 'map',
 				slice_devider: true,
@@ -455,6 +464,36 @@ export default {
 			}
 		}, ...this.slices]
 
+		// Room mates slice
+		if(this.homeDetails.housemates && this.homeDetails.housematesArray != undefined &&  this.homeDetails.housematesArray.length > 0) {
+			this.slices = [{
+				isBuildingPage:"Yes",
+				slice_type: 'image_gallery',
+				slice_label: 'avatars',
+				slice_devider: true,
+				items: this.homeDetails.housematesArray,
+				primary: {
+					gallery_title: [
+						{
+							spans: [],
+							text:"Housemates",
+							type:"heading2"
+						}
+					]
+				}
+			}, ...this.slices]
+		}
+
+		// Spacer slice
+		this.slices = [{
+			slice_type: 'spacer',
+			slice_label: null,
+			items: [],
+			primary: {
+				pixels:50
+			}
+		}, ...this.slices]
+
 		// Amenities slice
 		if(this.homeDetails.amenitiesArray != undefined && this.homeDetails.amenitiesArray.length > 0) {
 			this.slices = [{
@@ -475,36 +514,6 @@ export default {
 			}, ...this.slices]
 		}
 	
-		// Spacer slice
-		this.slices = [{
-			slice_type: 'spacer',
-			slice_label: null,
-			items: [],
-			primary: {
-				pixels:50
-			}
-		}, ...this.slices]
-
-		// Room mates slice
-		if(this.homeDetails.housemates && this.homeDetails.housematesArray != undefined &&  this.homeDetails.housematesArray.length > 0) {
-			this.slices = [{
-				isBuildingPage:"Yes",
-				slice_type: 'image_gallery',
-				slice_label: 'avatars',
-				slice_devider: true,
-				items: this.homeDetails.housematesArray,
-				primary: {
-					gallery_title: [
-						{
-							spans: [],
-							text:"Housemates",
-							type:"heading2"
-						}
-					]
-				}
-			}, ...this.slices]
-		}
-		
 		// Spacer slice
 		this.slices = [{
 			slice_type: 'spacer',

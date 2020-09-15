@@ -224,40 +224,70 @@
                 <prismic-rich-text :field="slice.primary.title" class="cms-title"/>
             </div>
             <div class="building-card row">
-                <div v-for="item in newHomeLists" :key="item.homeID" class="card-main col-lg-4 col-sm-6 col-xs-12">
-                    <div class="content-wrap">
-                        <n-link :to="'/findahome/'+item.homeID" class="card-link">
+                <template v-if="slice != undefined && slice.primary.slice_section == 'similar_cards'">
+                    <div v-for="item in newHomeLists" :key="item.homeID" class="card-main col-lg-4 col-sm-6 col-xs-12">
+                        <div class="content-wrap">
+                            <n-link :to="'/findahome/'+item.homeID" class="card-link">
+                                <img v-if="item.banner.url == ''" src="~/assets/img/noImageAvailable.png" :alt="item.banner.altText" >
+                                <img v-else :data-src="item.banner.url" class="lazyload"  :alt="item.banner.altText" >
+                                <div class="desc-box">
+                                    <div class="desc">
+                                        {{ item.cityName }}, {{ (item.neighborhoodName != undefined) ? item.neighborhoodName : ''  }}
+                                    </div>
+                                    <div class="name"> {{ item.name }} </div>
+                                    <div class="address">
+                                        <p>{{ item.address }}</p>
+                                    </div>
+                                    <div class="building-bottom-content">
+                                        <div class="price">
+                                            <p>{{ item.totalBedrooms }} bedrooms available</p>
+                                        </div>
+                                        <div class="price">
+                                            <p>Starting from {{ item.priceCurrency }}{{ Number(item.startingPrice).toLocaleString() }}/mo</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </n-link>
+                        </div>
+                    </div> 
+                </template>
+                <!-- Similar Homes: END--->
+                <template v-else>
+                    <div v-for="item in newHomeLists" :key="item.homeID" class="card-main col-lg-4 col-sm-6 col-xs-12">
+                        <div class="content-wrap">
+                            <n-link :to="'/findahome/'+item.homeID" class="card-link">
 
-                            <img v-if="item.banner.url == ''" src="~/assets/img/noImageAvailable.png" :alt="item.banner.altText" >
-                            <img v-else :data-src="item.banner.url" class="lazyload"  :alt="item.banner.altText" >
-                            <div class="desc-box">
-                                <div class="desc">
-                                    {{ item.cityName }}, {{ (item.neighborhoodName != undefined) ? item.neighborhoodName : ''  }}
-                                </div>
-                                <div class="name"> {{ item.name }} </div>
-                                <!-- <div class="title"> {{ item.neighborhoodName }} </div> 
-                                <div class="address">
-                                    <p>{{ item.address }}</p>
-                                </div> -->
-                                <div class="desc detail-desc">
-                                    <!-- <p>{{ item.description | strippedContent }}</p> -->
-                                    <p><span v-html="item.description"></span></p>
-                                </div>
-                                <div class="building-bottom-content">
-                                    <div class="price">
-                                        <p>Starting from {{ item.priceCurrency }}{{ Number(item.startingPrice).toLocaleString() }}/mo</p>
+                                <img v-if="item.banner.url == ''" src="~/assets/img/noImageAvailable.png" :alt="item.banner.altText" >
+                                <img v-else :data-src="item.banner.url" class="lazyload"  :alt="item.banner.altText" >
+                                <div class="desc-box">
+                                    <div class="desc">
+                                        {{ item.cityName }}, {{ (item.neighborhoodName != undefined) ? item.neighborhoodName : ''  }}
                                     </div>
-                                    <div v-if="item.availability != null" class="room-available-today">
-                                        <p v-if=" item.availability != 'Fully booked'">{{ item.availability }}</p>
+                                    <div class="name"> {{ item.name }} </div>
+                                    <!-- <div class="title"> {{ item.neighborhoodName }} </div> 
+                                    <div class="address">
+                                        <p>{{ item.address }}</p>
+                                    </div> -->
+                                    <div class="desc detail-desc">
+                                        <!-- <p>{{ item.description | strippedContent }}</p> -->
+                                        <p><span v-html="item.description"></span></p>
                                     </div>
-                                    <div v-else class="room-available-today">
-                                        <p>Not available</p>
+                                    <div class="building-bottom-content">
+                                        <div class="price">
+                                            <p>Starting from {{ item.priceCurrency }}{{ Number(item.startingPrice).toLocaleString() }}/mo</p>
+                                        </div>
+                                        <div v-if="item.availability != null" class="room-available-today">
+                                            <p v-if=" item.availability != 'Fully booked'">{{ item.availability }}</p>
+                                        </div>
+                                        <div v-else class="room-available-today">
+                                            <p>Not available</p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </n-link>
-                    </div>
-                </div> 
+                            </n-link>
+                        </div>
+                    </div> 
+                </template>
             </div> 
         </div>
     </div> 
