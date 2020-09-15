@@ -5,7 +5,7 @@
                 <div class="section-main-title" ><prismic-rich-text :field="slice.primary.title" class="cms-title"/></div>
                 <div class="room-card">
                     <div class="row new-room-box">
-                        <div class="col-sm-4" v-for="(item, item_index) in slice.items" :key="item.roomId">
+                        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12" v-for="(item, item_index) in slice.items" :key="item.roomId">
                             <div class="room-image">
                                 <carousel 
                                     v-if="slice.room_image && slice.room_image.toLowerCase() === 'slider'"
@@ -444,6 +444,9 @@ const FindaHomeSideForm = () => import("../forms/FindaHomeSideForm.vue");
 }
 
 /*** Insys:START */
+.new-room-box {
+    margin-bottom: 50px;
+}
 .new-room-box .detail-inner {
     padding: 15px;
     margin-top: -10px;

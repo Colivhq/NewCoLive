@@ -45,7 +45,7 @@
               <prismic-rich-text :field="item.overlay_text" />
               <prismic-link :field="item.link" class="gallery-link">{{ $prismic.asText(item.link_label) }}</prismic-link>
             </div>
-            <div v-else-if="slice.slice_label == 'icons'" v-bind:key="index" class="gallery-item galley-item-icon col-lg-4 col-md-4 col-sm-6 col-xs-6">
+            <div v-else-if="slice.slice_label == 'icons'" v-bind:key="index" class="gallery-item galley-item-icon col-lg-3 col-md-3 col-sm-6 col-xs-6">
               <img :src="item.icon" :alt="item.name" /> <!-- this sets the right image resolution, based on the slice label -->
 						  <div class="title">
                 <h3>{{ item.name }}</h3>
@@ -92,9 +92,9 @@ export default {
         this.isGallaryClass = true
         this.gallaryClass = 'galley-custom-avatar'
     } else if(this.slice.slice_label === 'icons') {
-        if(this.slice.items.length > 9) {
+        if(this.slice.items.length > 8) {
           this.viewMore = true;
-          this.galleryItems= this.slice.items.slice(0, 9);
+          this.galleryItems= this.slice.items.slice(0, 8);
         }
         this.isGallaryClass = true
         this.gallaryClass = 'galley-custom-icon'
@@ -114,7 +114,8 @@ avatars (630x630) - as many images per rows as possible, it could go on a second
  -->
 <style scoped>
 .view-more {
-  font-size: 25px;
+  font-size: 16px;
+  font-weight: 500;
   color: rgb(34, 34, 34) !important;
   font-weight: 400;
   cursor: pointer;
@@ -148,7 +149,8 @@ avatars (630x630) - as many images per rows as possible, it could go on a second
 }
 .image-gallery .gallery img {
   margin-bottom: 15px;
-  width: auto;
+  /* width: auto; */
+  width: 25%;
 }
 .image-gallery.content-section .gallery-item .title h4 {
   font-size: 25px;
@@ -191,6 +193,9 @@ avatars (630x630) - as many images per rows as possible, it could go on a second
 .galley-full-width .galley-custom-icon {
   padding-top: 15px;
 }
+.galley-custom-icon {
+  width: 100%;
+}
 .galley-full-width {
   background-color: #fff8e5;
   padding: 30px 0;
@@ -223,6 +228,8 @@ avatars (630x630) - as many images per rows as possible, it could go on a second
   margin-left: 15px;
   font-weight: 400;
   text-align: left;
+  font-size: 16px;
+  font-weight: 500;
 }
 @media (max-width: 1199px) {
   .image-gallery.content-section {

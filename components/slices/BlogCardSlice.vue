@@ -48,6 +48,13 @@
                                 </span>
                             </p>
                         </div>
+                        <div class="blog-topics">
+                            <p class="topic" v-for="(author, index) in authorList" :key="'fil_top_'+index" @click="authorFilter(index)">
+                                <span class="topic-content">
+                                    {{index}} ({{author}})
+                                </span>
+                            </p>
+                        </div>
                     </div>
                 </div> 
                 <div class="row view-more-blogs" v-if="slice.primary.blog_link.length != 0">
@@ -72,7 +79,8 @@ export default {
             blogList: [],
             blogListCopy: [],
             topicList:[],
-            topics_and_authors: true,
+            authorList:[],
+            topics_and_authors: this.slice.primary.authors_and_topics,
         }
     },
     filters: {
@@ -84,10 +92,18 @@ export default {
         let limit= this.slice.primary.card_limit + 1;
         this.$prismic.api.query(this.$prismic.predicates.at('document.type', 'blogpage'), 	
         { orderings : '[my.blogpage.publish_date desc]', 'pageSize': limit }).then(async (response) => {
-            //this.blogList1 = response.results
             for (let blog of Object.values(response.results)) { 
                 if(blog.uid != this.slice.current_blog && this.blogList.length <= this.slice.primary.card_limit) {
                     let topicArray = await this.getTopics(blog)
+                    let authorArray = []
+                    if (typeof blog.data.author == 'object' && blog.data.author.id) {
+                        let author = await this.$prismic.api.query(this.$prismic.predicates.at('document.id', blog.data.author.id))
+                        authorArray.push(author.results[0])
+                        authorArray.forEach((content, index) => {
+                            this.authorList.push(content.data.author)
+                             blog.data.filterathor = content.data.author
+                        })
+                    }
                     blog.data.topics = topicArray.length ? topicArray.slice(0, 3) : []
                     var filterTopics = [];
                     if(topicArray.length) {
@@ -102,6 +118,7 @@ export default {
             this.blogList = this.blogList.slice(0, this.slice.primary.card_limit)
             this.blogListCopy = this.blogList.slice(0, this.slice.primary.card_limit)
             this.topicList = this.topicList.reduce((a,c)=> (a[c]=++a[c]||1,a) ,{});
+            this.authorList = this.authorList.reduce((a,c)=> (a[c]=++a[c]||1,a) ,{});
         });
     },
     methods: {
@@ -117,6 +134,17 @@ export default {
                 this.topicList.push(content.data.topic)
 			})
             return topicArray
+        },
+        async getAuthors(blog) {
+            let authorArray = []
+            if (typeof blog.data.author == 'object' && blog.data.author.id) {
+                let author = await this.$prismic.api.query(this.$prismic.predicates.at('document.id', blog.data.author.id))
+                authorArray.push(author.results[0])
+                authorArray.forEach((content, index) => {
+                    this.authorList.push(content.data.author)
+                })
+            }
+            return content.data.author
         },
         topicFilter(topic) {
             this.blogList = this.blogListCopy.filter((blog) => {
@@ -141,11 +169,13 @@ export default {
     color: #000;
 }
 .blog-filter-topics .blog-topics .topic {
-    padding-bottom: 25px !important;
+    height: auto !important;
     font-size: 14px !important;
     font-weight: normal !important;
     text-align: left !important;
     cursor: pointer;
+    padding: 3px !important;
+    line-height: normal;
 }
 .view-more-blogs a{ 
     font-size: 28px;
