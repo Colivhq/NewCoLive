@@ -35,7 +35,7 @@
                   <template v-if="slice.slice_type === 'header'">
                     <a v-if="slice.primary.link.link_type == 'Any'"
                       :key="'nav-link-' + index"
-                      :href="'javascript:void(0)'" 
+                      :href="'javascript:void(0)'"
                       :class="'menu-maintitle nav-link'"
                       :style="{'color': fields.header.text_color}"
                       data-toggle="dropdown" >
@@ -65,7 +65,10 @@
                     <template v-if="slice.items.length >= 1">
                       <div class="dropdown-menu" aria-labelledby="navbarDropdown" :style="background">
                         <template v-for="(item, index) in slice.items">
-                          <prismic-link :field="item.sub_nav_link" :key="'header-item-' + index"
+                          <prismic-link
+                            :field="item.sub_nav_link"
+                            :key="'header-item-' + index"
+                            @click.native="closeMenu()"
                             class="menu-subtitle dropdown-item">
                             <!-- {{ $prismic.richTextAsPlain(item.sub_nav_label) }} -->
                             {{item.sub_nav_label}}
