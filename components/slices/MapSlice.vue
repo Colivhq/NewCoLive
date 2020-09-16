@@ -1,9 +1,11 @@
 <template>
     <section class="inner-content-wrapper">
-        <div class="section-main-title" v-if="slice.primary.map_title != undefined">
-          <prismic-rich-text :field="slice.primary.map_title" class="cms-title"/>
+        <div class="cms-main-wrap">
+            <div class="section-main-title" v-if="slice.primary.map_title != undefined">
+            <prismic-rich-text :field="slice.primary.map_title" class="cms-title"/>
+            </div>
+            <div class="google-map" :id="mapName"></div>
         </div>
-        <div class="google-map" :id="mapName"></div>
     </section>
 </template>
 <script>

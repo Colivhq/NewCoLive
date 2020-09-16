@@ -308,7 +308,8 @@ export default {
       } catch (e) {
         console.log('Error', e)
         // Returns error page
-        error({ statusCode: 404, message: 'Page not found' })
+        console.log('Page not found', e)
+        //error({ statusCode: 404, message: 'Page not found'+e })
       }
     },
     showMapOrList() {

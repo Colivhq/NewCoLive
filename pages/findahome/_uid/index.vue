@@ -51,19 +51,22 @@
 				<div class="home-detail-slider-content">
 					<div class="nb-main mt-3 row">
 						<!-- <i class="fa fa-map icon_ font-weight-bold" aria-haspopup="true" aria-expanded="false"></i> -->
-						<div class="col-sm-6"> {{ homeDetails.cityName }}, {{ homeDetails.neighbourhoodName }} </div>
-						<div v-if="homeDetails.totalBedrooms != null" class="icons-details col-sm-6">
-							<div class="icon-1 icon pull-right">
-								<div class="icon-wrap">
-									<i class="fa fa-bed icon_ font-weight-bold" aria-haspopup="true" aria-expanded="false"></i>
-									<!-- <img src="~/assets/img/bedroom.png" alt="bedroom" class="build-icon"> -->
-								</div>
-								<div class="desc">
-									<p>{{ homeDetails.totalBedrooms }}</p>
-									<div><p>bedrooms</p></div>
-								</div>
-							</div>	
+						<div class="col-sm-12"> 
+							<div v-if="homeDetails.totalBedrooms != null" class="icons-details">
+								<div class="icon-1 icon">
+									<div class="icon-wrap">
+										<i class="fa fa-bed icon_ font-weight-bold" aria-haspopup="true" aria-expanded="false"></i>
+										<!-- <img src="~/assets/img/bedroom.png" alt="bedroom" class="build-icon"> -->
+									</div>
+									<div class="desc">
+										<p>{{ homeDetails.totalBedrooms }}</p>
+										<div><p>bedrooms</p></div>
+									</div>
+								</div>	
+							</div>
+							<div class="city-text">{{ homeDetails.cityName }}, {{ homeDetails.neighbourhoodName }} </div>
 						</div>
+						
 					</div>
 					<div class="home-detail-title"><h1>{{ homeDetails.name }}</h1></div>
 					<div class="home-detail-address">{{ homeDetails.address }}</div>
@@ -76,7 +79,7 @@
 			<hr>
 		</div>
 	</div>
-	<slices-block :slices="slices"/>
+	<slices-block :slices="slices" :is-home-detail="true"/>
   </section>
 </template>
 
@@ -598,7 +601,7 @@ h3 {
 .home-detail .home-detail-slider .home-detail-slider-content {
 	z-index: 99;
 	position: relative;
-	margin-bottom: 50px;
+	margin-bottom: 40px;
 }
 .icons-details .icon-wrap svg{
 	color: rgb(114, 191, 68);
@@ -635,8 +638,8 @@ h3 {
 }
 .home-detail .home-detail-slider .icons-details .icon {
 	background: #f5f5f5;
-    border-radius: 5px;
-    padding: 5px 5px 0px 10px;
+    border-radius: 0;
+    padding: 5px 10px;
 }
 .home-detail .home-detail-slider .icons-details .icon ,
 .home-detail .home-detail-slider .icons-details .desc {
@@ -654,13 +657,23 @@ h3 {
 }
 .home-detail .home-detail-slider .icons-details .desc {
 	margin-left: 10px;
+	font-weight: 500;
+    color: #222;
+    text-transform: capitalize;
 }
 .home-detail .home-detail-slider .icons-details  {
 	/* margin-top: 25px; */
+	position: absolute;
+    top: 0;
+    right: 0;
 }
 .home-detail .home-detail-slider .build-desc p {
 	margin-bottom: 0;
     margin-top: 30px;
+	color: #222;
+    font-size: 15px;
+    font-weight: 500;
+    word-break: break-word;
 }
 .home-detail .home-detail-slider .icons-details .icon:nth-child(n+5) {
 	margin-top: 15px;
@@ -759,12 +772,133 @@ h3 {
 .home-detail .room-wrapper .room-detail .feature ul li {
 	width: 100%;
 }
+/* 16/09/2020 - DAB */
+/* .home-detail-slider .VueCarousel .VueCarousel-slide {
+    margin-right: -100%;
+}
+.home-detail-slider .VueCarousel .VueCarousel-inner:nth-child(1) .slider-img {
+	position: absolute;
+    right: auto;
+    left: -85%;
+}
+.home-detail-slider .VueCarousel .VueCarousel-inner:nth-child(2) {
+	width: 50%;
+    position: absolute;
+    left: 15%;
+    right: 15%;
+    height: 100%;
+    display: block;
+}
+.home-detail-slider .VueCarousel .VueCarousel-inner:nth-child(2) .slider-img {
+	position: absolute;
+    width: 70%;
+    left: 15%;
+    right: 15%;
+    display: inline-block;
+    height: 100%;
+} */
+/* slider content bottom section - DAB */
+.homepage hr {
+    border-color: #f3f3f3;
+	margin-left: 15px;
+	margin-right: 15px;
+}
+.home-detail-slider .home-detail-slider-content .city-text {
+	font-size: 14px;
+    color: #9c9c9c;
+    font-weight: 600;
+	display: inline-block;
+}
+.home-detail .home-detail-slider .icons-details .icon .icon-wrap i {
+	vertical-align: middle;
+}
+.home-detail .home-detail-slider .home-detail-address {
+	color: #222;
+    font-size: 14px;
+    font-weight: 500;
+}
+.home-detail .cust-findhome-wrap {
+	position: relative;
+	margin-right: -400px;
+	padding-right: 440px;
+}
+.home-detail .cust-findhome-wrap .inner-content-wrapper {
+	max-width: unset;
+	padding-right: 0;
+}
+/* select room */
+.home-detail .new-room-box .detail-inner .type h3 {
+    color: #222;
+	line-height: normal;
+}
+.home-detail .new-room-box .detail-inner .price p {
+    font-weight: 500;
+	line-height: 18px;
+	margin-bottom: 15px;
+	margin-top: 8px;
+}
+.home-detail .new-room-box .detail-inner .desc {
+	position: relative;
+}
+.home-detail .new-room-box .detail-inner .desc::before {
+	content: '';
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+	-moz-transform: translateY(-50%); 
+	-o-transform: translateY(-50%); 
+	-ms-transform: translateY(-50%);
+	transform: translateY(-50%);
+}
+.home-detail .new-room-box .room-main {
+    box-shadow: -1px 7px 20px 0px rgb(0 0 0 / 8%);
+}
+.home-detail .new-room-box .detail-inner .desc .feature {
+	color: #222;
+    font-size: 14px;
+    padding-left: 20px;
+	margin-bottom: 0;
+}
+.home-detail .new-room-box .detail-inner:nth-child(n+1).desc {
+	margin-top: 5px;
+}
+.home-detail .new-room-box .detail-inner .request-btn {
+	border: 1px solid #ddd;
+    padding: 5px;
+    color: #222;
+    margin-top: 15px;
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    background-color: #fff;
+}
+/* image-gallery  */
+.home-detail .image-gallery.content-section .section-main-title .cms-title :first-child .view-more {
+    color: #72bf44;
+}
+/* similar homes  */
+.home-detail .building-cms .building-card .name {
+   color: #222;
+   line-height: 22px;
+}
+.home-detail .building-cms .building-card .content-wrap .desc-box {
+    padding: 20px 15px;
+}
 @media(min-width: 992px){
 	.home-detail .inner-content-wrapper {
 		padding-right: 150px;
 	}
 	.home-detail .find-home-outer .inner-content-wrapper {
     	padding-right: 0;
+	}
+}
+@media(max-width: 1550px){
+	.home-detail .cust-findhome-wrap {
+	    padding-right: 330px;
+	    margin-right: -300px;
 	}
 }
 @media(max-width: 1399px){
@@ -780,6 +914,12 @@ h3 {
     	padding-right: 0;
 	}
 }
+@media(max-width: 1100px){
+	.home-detail .cust-findhome-wrap {
+		padding-right: 300px;
+    	margin-right: -240px;
+	}
+}
 /* Slider section */
 @media(max-width:1024px){
 	.home-detail .inner-content-wrapper {
@@ -793,9 +933,6 @@ h3 {
 	.home-detail .find-home-outer .form {
 		margin: 0 15px;
 	}
-	.home-detail .inner-content-wrapper {
-		padding-right: 300px;
-	}
 	.home-detail .image-gallery.content-section .gallery-item {
 		-ms-flex: 0 0 50%;
 	    flex: 0 0 50%;
@@ -803,6 +940,9 @@ h3 {
 	}
 	.home-detail .room-wrapper {
 		max-width: 480px;
+	}
+	.home-detail .home-detail-slider .home-detail-title > :first-child {
+		font-size: 28px;
 	}
 }
 @media(max-width:767px) {
@@ -824,6 +964,17 @@ h3 {
 	.home-detail .room-wrapper {
     	margin: 0 auto;
 	}
+	/* slider content bottom section - DAB */
+	.home-detail-slider .home-detail-slider-content .city-text {
+    	margin-bottom: 15px;
+	}
+	.home-detail .home-detail-slider .icons-details {
+		right: 15px;
+	}
+	.home-detail .cust-findhome-wrap {
+		padding-right: 0;
+		margin-right: 0;
+	}
 }
 @media(max-width:640px){
 	.home-detail .embedslice-cms iframe {
@@ -839,6 +990,33 @@ h3 {
 	.home-detail .embedslice-cms iframe {
 		width: 290px;
 	}
+	/* slider content bottom section - DAB */
+	.home-detail .home-detail-slider .icons-details {
+		position: relative;
+    	display: inline-block;
+    	margin-bottom: 15px;
+	}
+	.home-detail-slider .home-detail-slider-content .city-text {
+		display: block;
+	}
+	.home-detail .home-detail-slider .home-detail-title > :first-child {
+		font-size: 21px;
+	}
+	.home-detail .home-detail-slider .icons-details {
+		left: 0;
+		right: auto;
+	}
+	.home-detail-slider .home-detail-slider-content .city-text {
+		margin-bottom: 0;
+	}
+	.home-detail .new-room-box .room-main .room-image .slider-img img {
+		width: 100%;
+	}
+	.home-detail .image-gallery.content-section  .section-main-title .view-more ,
+	.home-detail .image-gallery.content-section  .section-main-title .view-more i {
+	    font-size: 16px!important;
+	}
+
 }
 @media(max-width:480px) {
 	.home-detail .image-gallery.content-section .gallery-item {
