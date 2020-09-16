@@ -314,6 +314,20 @@ export default {
 			});
 		});
 
+		// Home details slice
+		this.slices = [{
+			slice_type: 'form',
+			slice_label: 'homedetails',
+			homeID: this.$route.params.uid,
+			OperatorID: this.homeDetails.operatorId,
+			neighborhoodId: this.homeDetails.neighborhoodId,
+			buildingId: this.homeDetails.buildingId,
+			homeName: this.homeDetails.name,
+			cityName: this.homeDetails.cityName,
+			cityID: this.homeDetails.cityId,
+			sideFormBackgroundColor: this.homeDetails.side_form_background_color
+		}, ...this.slices]
+
 		// Similar homes
 		if (this.homeDetails.similar_homes) {
 			let homeList = [];
@@ -555,21 +569,6 @@ export default {
 						pixels:50
 					}
 				}, ...this.slices]
-
-				
-		// Home details slice
-		this.slices = [{
-			slice_type: 'form',
-			slice_label: 'homedetails',
-			homeID: this.$route.params.uid,
-			OperatorID: this.homeDetails.operatorId,
-			neighborhoodId: this.homeDetails.neighborhoodId,
-			buildingId: this.homeDetails.buildingId,
-			homeName: this.homeDetails.name,
-			cityName: this.homeDetails.cityName,
-			cityID: this.homeDetails.cityId,
-			sideFormBackgroundColor: this.homeDetails.side_form_background_color
-		}, ...this.slices]
 	},
 	fetchOnServer: false
 }
