@@ -24,7 +24,11 @@ export default function (doc) {
     return '/blog/' + doc.uid
   }
   if (doc.type === 'page') {
-    return '/page/' + doc.uid
+    if (doc.uid === "findahome") {
+      return doc.uid
+    } else {
+      return '/page/' + doc.uid
+    }
   }
   if (doc.type === 'city') {
     return '/city/' + doc.uid

@@ -69,11 +69,13 @@
 						<div class="content-container">
 							<div class="heading2-container px-2 p-lg-0" v-for="(content, tocIndex) in toc" :key="tocIndex">
 								<div class="my-2 line-height-h2">
-									<a class="f-12" :href="'#' + getId(content)"> {{content.text}} </a>
+									<!-- <a class="f-12" :href="'#' + getId(content)"> {{content.text}} </a> -->
+									<a class="f-12" @click="hrefTo(getId(content))"> {{content.text}} </a>
 								</div>
 								<div v-for="(heading3, ind) in content.heading3" :key="ind" class="heading3">
 									<div class="ml-1 line-height">
-										<a :href="'#' + getId(heading3)" class="f-10 content-sublink">
+										<!-- <a :href="'#' + getId(heading3)" class="f-10 content-sublink"> -->
+										<a @click="hrefTo(getId(heading3))" class="f-10 content-sublink">
 											&bull; {{heading3.text}}
 										</a>
 									</div>
@@ -349,6 +351,10 @@ export default {
 	methods: {
 		getId (article) {
 			return article.text.split(" ").join("")
+		},
+		hrefTo(val){
+			const move = window.scrollY + document.getElementById(`${val}`).getBoundingClientRect().top
+			window.scrollTo(0, move - 100);
 		}
 	}
 }
