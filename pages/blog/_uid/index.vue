@@ -221,11 +221,6 @@ export default {
 					content: 'summary'
 				},
 				{
-					hid: 'twittercreator',
-					name: 'twitter:creator',
-					content: this.twitter_handle
-				},
-				{
 					hid: 'twitterimage',
 					name: 'twitter:image',
 					content: this.meta_image
@@ -302,9 +297,8 @@ export default {
 				meta_title: (document.page_title.length) ? document.page_title[0].text : '',
 				meta_description: (document.seo_description[0].text != null &&  document.seo_description[0].text.length > 170) ?  document.seo_description[0].text.substring(0, 167) + '...' :  document.seo_description[0].text,
 				meta_image: (document.meta_image.url) ? document.meta_image.url : '',
-				meta_site_name: '',
+				meta_site_name: process.env.COMPANY_NAME,
 				meta_url: process.env.baseUrl+'/blog/'+params.uid,
-				twitter_handle: (document.twitter_handle) ? document.twitter_handle : '',
 
 				structuredData: {
 					"@context": "https://schema.org",

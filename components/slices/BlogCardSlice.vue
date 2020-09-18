@@ -42,6 +42,11 @@
                     <div class="col-lg-2 blog-filter-topics" v-if="topics_and_authors">
                         <h3>Topics</h3>
                         <div class="blog-topics">
+                            <p class="topic" @click="topicFilter('All')">
+                                <span class="topic-content">
+                                    All ({{blogList.length}})
+                                </span>
+                            </p>
                             <p class="topic" v-for="(topic, index) in topicList" :key="'fil_top_'+index" @click="topicFilter(index)">
                                 <span class="topic-content">
                                     {{index}} ({{topic}})
@@ -49,7 +54,7 @@
                             </p>
                         </div>
                         <div class="blog-topics">
-                            <p class="topic" v-for="(author, index) in authorList" :key="'fil_top_'+index" @click="authorFilter(index)">
+                            <p class="topic" v-for="(author, index) in authorList" :key="'fil_top_auth_'+index" @click="authorFilter(index)">
                                 <span class="topic-content">
                                     {{index}} ({{author}})
                                 </span>
@@ -147,7 +152,19 @@ export default {
             return content.data.author
         },
         topicFilter(topic) {
-            this.blogList = this.blogListCopy.filter((blog) => {
+            this.blogListCopy = this.blogList.filter((blog) => {
+                if(blog.data.filtertopics.length > 0) {
+                    if(blog.data.filtertopics.includes(topic)) {
+                        return blog;
+                    }
+                }
+            });
+            if(topic == 'All') {
+                this.blogListCopy = this.blogList
+            }
+        },
+        authorFilter(topic) {
+            this.blogListCopy = this.blogList.filter((blog) => {
                 if(blog.data.filtertopics.length > 0) {
                     if(blog.data.filtertopics.includes(topic)) {
                         return blog;

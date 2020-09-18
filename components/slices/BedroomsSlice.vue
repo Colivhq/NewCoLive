@@ -56,64 +56,14 @@
                                         <div class="price">
                                             <p>Starting at {{ item.priceCurrency}}{{ Number(item.startingPrice).toLocaleString() }} {{ item.priceUnit }}</p>
                                         </div>
-                                        <div class="desc">
-                                        <p v-html="item.description" class="feature"></p>
+                                        <div class="desc feature-wrap">
+                                            <p v-html="item.description" class="feature"></p>
                                         </div>
                                         <div class="btn-wrapper">
                                             <a v-if="(item.availability == 'Available' || item.availability == 'At least a bed available' || item.availability == 'Available soon')" href="javascript:void(0)" ref="item.roomId"  class="request-btn" @click="showModal(item.roomId)">Book now</a>
                                             <a v-else-if="(item.availability == 'Available')" href="javascript:void(0)" ref="item.roomId"  class="request-btn" @click="showModal(item.roomId)"> Join the waiting list</a>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div v-for="(item, item_index) in slice.items" :key="item.roomId" class="room-wrapper" style="display:none" >
-                        <div class="room-image">
-                            <carousel 
-                                v-if="slice.room_image && slice.room_image.toLowerCase() === 'slider'"
-                                :autoplay="true" 
-                                :loop="true"
-                                :perPage="1"
-                                :navigationEnabled="true"
-                                :paginationEnabled="true"
-                                :speed="2000" 
-                                navigationNextLabel="<i class='fa angle-right cust-icon'></i>"
-    				            navigationPrevLabel="<i class='fa angle-left cust-icon'></i>"
-                                paginationActiveColor="#72bf44" 
-                                :autoplayTimeout="3000">
-                                <template v-for="(image, index) in item.roomPicturesArray" >
-                                    <slide :key="'carousel_'+index" v-if=" (image.link != '')">
-                                        <picture class="slider-img">
-                                            <img :src="image.link" :alt="image.description">                                        
-                                        </picture>
-                                    </slide>
-                                </template>
-                            </carousel>
-                            <template v-if="slice.room_image && slice.room_image.toLowerCase() != 'slider'">
-                                <picture class="slider-img">
-                                    <img :src="slice.items[0].roomPicturesArray[0].link" :alt="slice.items[0].roomPicturesArray[0].description">                                        
-                                </picture>
-                            </template>
-                            <div class="overlay">
-                                <p v-if="item.availability != null">{{ item.availability }}</p>
-                                <p v-else>Not Available</p>
-                            </div>
-                        </div>
-                        <div class="room-detail" :key="item_index" :style="{'background-color': slice.background}">
-                            <div class="detail-inner">
-                                <div class="type">
-                                    <h3>{{ item.roomName }}</h3>
-                                </div>
-                                <div class="desc">
-                                   <p v-html="item.description" class="feature"></p>
-                                </div>
-                                <div class="btn-wrapper">
-                                    <div class="price">
-                                        <p>Starting at {{ item.priceCurrency}}{{ Number(item.startingPrice).toLocaleString() }} {{ item.priceUnit }}</p>
-                                    </div>
-                                    <a v-if="(item.availability == 'Available' || item.availability == 'At least a bed available' || item.availability == 'Available soon')" href="javascript:void(0)" ref="item.roomId"  class="request-btn" @click="showModal(item.roomId)">Book now</a>
-                                    <a v-else-if="(item.availability == 'Available')" href="javascript:void(0)" ref="item.roomId"  class="request-btn" @click="showModal(item.roomId)"> Join the waiting list</a>
                                 </div>
                             </div>
                         </div>
@@ -498,6 +448,10 @@ const FindaHomeSideForm = () => import("../forms/FindaHomeSideForm.vue");
 }
 .VueCarousel-dot-container .VueCarousel-dot {
 	margin-top: 0!important;
+}
+.new-room-box .room-detail .detail-inner .feature-wrap {
+	height: 170px;
+    overflow: hidden;
 }
 /*** Insys:END */
 

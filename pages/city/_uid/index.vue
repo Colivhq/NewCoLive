@@ -88,11 +88,6 @@ export default {
 					content: 'summary'
 				},
 				{
-					hid: 'twittercreator',
-					name: 'twitter:creator',
-					content: this.twitter_handle
-				},
-				{
 					hid: 'twitterimage',
 					name: 'twitter:image',
 					content: this.meta_image
