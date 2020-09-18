@@ -12,7 +12,6 @@
     endpoint: 'https://colivhq.cdn.prismic.io/api/v2'
   };
 </script>
-<script type="text/javascript" src="https://static.cdn.prismic.io/prismic.min.js?new=true"></script>
 <script>
 import HeaderPrismic from '~/components/HeaderPrismic.vue'
 import FooterPrismic from '~/components/FooterPrismic.vue'
