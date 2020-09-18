@@ -1,6 +1,6 @@
 <template>
 	<section class="content-page findahome">
-		<building-card-slice :home-lists="homeLists" :home-lists-copy="homeLists" :default-filter="defaultFilter"/>
+		<!-- <building-card-slice :home-lists="homeLists" :home-lists-copy="homeLists" :default-filter="defaultFilter"/> -->
 		<slices-block :slices="slices"/>
 		<div class="slider-cms">	
 			<div v-if="pending" class="loader"></div>
@@ -258,6 +258,7 @@ export default {
 		padding: 0px;
 	}
 	.content-page {
+		padding-top: 50px !important;
 		padding-bottom: 0px;
 	}
 </style>
