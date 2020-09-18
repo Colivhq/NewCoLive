@@ -20,17 +20,27 @@
                                         navigationPrevLabel="<i class='fa angle-left cust-icon'></i>"
                                         paginationActiveColor="#72bf44" 
                                         :autoplayTimeout="3000">
-                                        <template v-for="(image, index) in item.roomPicturesArray" >
-                                            <slide :key="'carousel_'+index" v-if=" (image.link != '')">
-                                                <picture class="slider-img">
-                                                    <img :src="image.link" :alt="image.description">                                        
-                                                </picture>
-                                            </slide>
+                                        <template v-if="item.roomPicturesArray.length > 0">
+                                            <template v-for="(image, index) in item.roomPicturesArray" >
+                                                <slide :key="'carousel_'+index" v-if=" (image.link != '')">
+                                                    <picture class="slider-img">
+                                                        <img :src="image.link" :alt="image.description">                                        
+                                                    </picture>
+                                                </slide>
+                                            </template>
+                                        </template>
+                                        <template v-else>
+                                            <picture class="slider-img">
+                                                <img src="~/assets/img/noBedroomAvailable.png" alt="no-image">                                        
+                                            </picture>
                                         </template>
                                     </carousel>
                                     <template v-if="slice.room_image && slice.room_image.toLowerCase() != 'slider'">
-                                        <picture class="slider-img">
+                                        <picture class="slider-img"  v-if="item.roomPicturesArray.length > 0">
                                             <img :src="slice.items[0].roomPicturesArray[0].link" :alt="slice.items[0].roomPicturesArray[0].description">                                        
+                                        </picture>
+                                        <picture v-else class="slider-img">
+                                            <img src="~/assets/img/noImageAvailable.png" alt="no-image">                                        
                                         </picture>
                                     </template>
                                     <div class="overlay">
@@ -477,6 +487,17 @@ const FindaHomeSideForm = () => import("../forms/FindaHomeSideForm.vue");
     margin-bottom: 0;
     display: inline-block;
     vertical-align: middle;
+}
+.new-room-box .room-image >>> .VueCarousel-pagination {
+	position: absolute;
+    top: auto;
+    bottom: 20px;
+}
+.VueCarousel-dot-container {
+	margin-top: 0!important;
+}
+.VueCarousel-dot-container .VueCarousel-dot {
+	margin-top: 0!important;
 }
 /*** Insys:END */
 

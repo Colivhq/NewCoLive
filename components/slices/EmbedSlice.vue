@@ -15,9 +15,19 @@
 <script>
 export default {
   props: ['slice'],
-  name: 'embed-slice'
+  name: 'embed-slice',
+  mounted() {
+    // Remove lazy-load attribute
+    $('.embedslice-cms iframe').removeAttr('v-lazy-load');
+    var src = $('.embedslice-cms iframe').attr('data-src');
+    $('.embedslice-cms iframe').removeAttr('data-src');
+    $('.embedslice-cms iframe').attr('src', src);
+  }
 }
 </script>
 
-<style>
+<style scoped>
+hr {
+  margin-top: 50px;
+}
 </style>
