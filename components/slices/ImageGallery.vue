@@ -150,10 +150,12 @@ hr {
 .image-gallery.content-section .gallery-link {
   display: block;
 }
+.image-gallery .galley-item-icon img{
+  width: 25% !important;   
+}
 .image-gallery .gallery img {
   margin-bottom: 15px;
-  /* width: auto; */
-  width: 25%;
+  width: auto;
 }
 .image-gallery.content-section .gallery-item .title h4 {
   font-size: 25px;

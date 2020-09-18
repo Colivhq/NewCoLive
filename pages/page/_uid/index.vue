@@ -84,11 +84,6 @@ export default {
           content: 'summary'
         },
         {
-          hid: 'twittercreator',
-          name: 'twitter:creator',
-          content: this.twitter_handle
-        },
-        {
           hid: 'twitterimage',
           name: 'twitter:image',
           content: this.twitter_image
@@ -118,8 +113,7 @@ export default {
         meta_description: (document.meta_description.length) ? document.meta_description[0].text : '',
         meta_image: (document.meta_image.url) ? document.meta_image.url : '',
         meta_url: (document.meta_url) ? document.meta_url.url : '',
-        meta_site_name: (document.meta_site_name.length) ? document.meta_site_name[0].text : '',
-        twitter_handle: (document.twitter_handle) ? document.twitter_handle : '',
+        meta_site_name: process.env.COMPANY_NAME,
         twitter_title: (document.twitter_title.length) ? document.twitter_title[0].text : '',
         twitter_description: (document.twitter_description.length) ? document.twitter_description[0].text : '',
         twitter_image: (document.twitter_image) ? document.twitter_image.url : '',
