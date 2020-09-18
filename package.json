@@ -29,7 +29,6 @@
     "prismic-vue": "^2.0.0",
     "vue": "^2.6.11",
     "vue-carousel": "^0.18.0",
-    "vue-moment": "^4.1.0",
     "vue-multiselect": "^2.1.6",
     "vue-socialmedia-share": "^1.0.1"
   },

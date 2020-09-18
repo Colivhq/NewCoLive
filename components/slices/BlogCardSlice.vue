@@ -70,7 +70,7 @@
 </template>
 
 <script>
-import moment from 'moment'
+// import moment from 'moment'
 export default {
     props: ['slice'],   
     name: 'blog-cards',
@@ -85,7 +85,14 @@ export default {
     },
     filters: {
         moment: function (date) {
-            return moment(date).format('DD-MM-YYYY');
+            if (date && date.length) {
+                const dateParts = date.split("-")
+                const aDate = `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`
+                return aDate
+                // return moment(date).format('DD-MM-YYYY');
+            } else {
+                return ''
+            }
         }
     },
     async created() {
