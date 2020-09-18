@@ -463,7 +463,7 @@ export default {
 					embed: {
 						embed_url: this.homeDetails['3DtourLink'],
 						height: 480,
-						html: '<iframe width="640" height="480" frameborder="0" allowfullscreen src="https://my.matterport.com/show/?brand=0&amp;m=' + this.homeDetails['3DtourLink'].split('?m=').pop() + '" ></iframe>',
+						html: '<iframe data-not-lazy width="100%" height="480" frameborder="0" allowfullscreen src="https://my.matterport.com/show/?brand=0&amp;m=' + this.homeDetails['3DtourLink'].split('?m=').pop() + '" ></iframe>',
 						width: 640
 					},
 					embed_html: []

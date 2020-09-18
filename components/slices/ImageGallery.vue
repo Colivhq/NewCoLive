@@ -113,6 +113,9 @@ icons (58x58) - three icons per rows, many rows
 avatars (630x630) - as many images per rows as possible, it could go on a second row; align left
  -->
 <style scoped>
+hr {
+  margin-top: 50px;
+}
 .view-more {
   font-size: 16px;
   font-weight: 500;
@@ -130,7 +133,7 @@ avatars (630x630) - as many images per rows as possible, it could go on a second
 }
 .section-main-title .cms-title >>> :first-child {
   color: #222222;
-  margin-bottom: 40px;
+  /* margin-bottom: 40px; */
   text-align: left;
 }
 .image-gallery.content-section .gallery-item {
@@ -209,7 +212,7 @@ avatars (630x630) - as many images per rows as possible, it could go on a second
   -webkit-align-items: center;
   -ms-flex-align: center;
   align-items: center;
-  margin-bottom: 30px;
+  margin-top: 30px;
 }
 .galley-custom-icon .galley-item-icon img {
   margin-bottom: 0;
