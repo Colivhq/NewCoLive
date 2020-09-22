@@ -114,7 +114,7 @@
 <script>
 // Imports for Prismic Slice components
 import SlicesBlock from '~/components/SlicesBlock.vue'
-import moment from 'moment'
+// import moment from 'moment'
 export default {
 	name: 'blog-page',
 	layout: 'homepage',
@@ -339,7 +339,14 @@ export default {
 	},
 	filters: {
         moment: function (date) {
-			return moment(date).format('DD-MM-YYYY');
+			if (date && date.length) {
+				const dateParts = date.split("-")
+				const aDate = `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`
+				return aDate
+			} else {
+				return ''
+			}
+			// return moment(date).format('DD-MM-YYYY');
         }
 	},
 	methods: {
