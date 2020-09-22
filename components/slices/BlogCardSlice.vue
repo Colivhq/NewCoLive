@@ -4,7 +4,7 @@
             <div class="cms-main-wrap blog-cms">
                 <prismic-rich-text :field="slice.primary.title" class="topic-heading"/>
                 <div class="blog-card row">
-                    <div :class="[ topics_and_authors ? 'col-lg-10': 'col-lg-12']">
+                    <div :class="[ topics_and_authors ? 'col-lg-9': 'col-lg-12']">
                         <div class="row">
                             <div v-for="item in blogList" :key="item.id" class="card-main col-lg-4 col-sm-6 col-xs-12">
                                 <div class="content-wrap">
@@ -39,27 +39,22 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-2 blog-filter-topics" v-if="topics_and_authors">
+                    <div class="col-lg-3 blog-filter-topics" v-if="topics_and_authors">
                         <h3>Topics</h3>
-                        <div class="blog-topics">
-                            <p class="topic" @click="topicFilter('All')">
-                                <span class="topic-content">
-                                    All ({{blogList.length}})
-                                </span>
-                            </p>
-                            <p class="topic" v-for="(topic, index) in topicList" :key="'fil_top_'+index" @click="topicFilter(index)">
+                        <div class="blog-topic-items">
+                            <p :class="'topic ' + [(filterSel != '') ? filterSel == index ? 'filter-applied' : 'filter-applied-all' : 'no-filter-applied']" v-for="(topic, index) in topicList" :key="'fil_top_'+index" @click="topicFilter(index)">
                                 <span class="topic-content">
                                     {{index}} ({{topic}})
                                 </span>
                             </p>
                         </div>
-                        <div class="blog-topics">
+                        <!-- <div class="blog-topics">
                             <p class="topic" v-for="(author, index) in authorList" :key="'fil_top_auth_'+index" @click="authorFilter(index)">
                                 <span class="topic-content">
                                     {{index}} ({{author}})
                                 </span>
                             </p>
-                        </div>
+                        </div> -->
                     </div>
                 </div> 
                 <div class="row view-more-blogs" v-if="slice.primary.blog_link.length != 0">
@@ -86,6 +81,7 @@ export default {
             topicList:[],
             authorList:[],
             topics_and_authors: this.slice.primary.authors_and_topics,
+            filterSel: ''
         }
     },
     filters: {
@@ -152,6 +148,7 @@ export default {
             return content.data.author
         },
         topicFilter(topic) {
+            this.filterSel = topic
             this.blogListCopy = this.blogList.filter((blog) => {
                 if(blog.data.filtertopics.length > 0) {
                     if(blog.data.filtertopics.includes(topic)) {
@@ -159,9 +156,6 @@ export default {
                     }
                 }
             });
-            if(topic == 'All') {
-                this.blogListCopy = this.blogList
-            }
         },
         authorFilter(topic) {
             this.blogListCopy = this.blogList.filter((blog) => {
@@ -185,7 +179,19 @@ export default {
     font-weight: bold;
     color: #000;
 }
-.blog-filter-topics .blog-topics .topic {
+.no-filter-applied.topic {
+    background-color: rgb(114 191 68 / 12%);
+    border: 1px solid rgba(114,191,68,.75);
+}
+.filter-applied.topic {
+    background-color: rgb(114 191 68 / 12%);
+    border: 1px solid rgba(114,191,68,.75);
+}
+.filter-applied-all.topic {
+    background-color: #feefef !important;
+    border: 1px solid #ef5357 !important;
+}
+.blog-filter-topics .blog-topic-items .topic {
     height: auto !important;
     font-size: 14px !important;
     font-weight: normal !important;
@@ -193,6 +199,19 @@ export default {
     cursor: pointer;
     padding: 3px !important;
     line-height: normal;
+
+    color: #000;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 0 4px;
+    margin-bottom: 0;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 7px;
+    min-width: 35px;
+    margin-top: 5px;
+    text-align: center;
+    height: 20px;
 }
 .view-more-blogs a{ 
     font-size: 28px;
