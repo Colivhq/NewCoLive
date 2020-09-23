@@ -48,13 +48,14 @@
                                 </span>
                             </p>
                         </div>
-                        <!-- <div class="blog-topics">
-                            <p class="topic" v-for="(author, index) in authorList" :key="'fil_top_auth_'+index" @click="authorFilter(index)">
+                        <h3 class="filter-separate">Authours</h3>
+                        <div class="blog-topic-items">
+                            <p :class="'topic ' + [(athourSel != '') ? athourSel.includes(index) ? 'filter-applied' : 'filter-applied-all' : 'no-filter-applied']" v-for="(author, index) in authorList" :key="'fil_top_auth_'+index" @click="authorFilter(index)">
                                 <span class="topic-content">
                                     {{index}} ({{author}})
                                 </span>
                             </p>
-                        </div> -->
+                        </div>
                     </div>
                 </div> 
                 <div class="row view-more-blogs" v-if="slice.primary.blog_link.length != 0">
@@ -81,7 +82,8 @@ export default {
             topicList:[],
             authorList:[],
             topics_and_authors: this.slice.primary.authors_and_topics,
-            filterSel: ''
+            filterSel: [],
+            athourSel: [],
         }
     },
     filters: {
@@ -154,30 +156,59 @@ export default {
             }
             return content.data.author
         },
-        topicFilter(topic) {
-            this.filterSel = topic
-            this.blogListCopy = this.blogList.filter((blog) => {
-                if(blog.data.filtertopics.length > 0) {
-                    if(blog.data.filtertopics.includes(topic)) {
-                        return blog;
+        filterBlog() {
+            if(this.filterSel.length > 0) {
+                this.blogListCopy = this.blogList.filter((blog) => {
+                    if(blog.data.filtertopics.length > 0 && this.filterSel.length > 0) {
+                        for(var i=0; i<=this.filterSel.length; i++) {
+                            if(blog.data.filtertopics.includes(this.filterSel[i])) {
+                                return blog;
+                            }
+                        }
                     }
-                }
-            });
+                });
+            }
+            if(this.athourSel.length > 0) {
+                this.blogListCopy = this.blogListCopy.filter((blog) => {
+                    if(blog.data.filterathor != undefined) {
+                        if(this.athourSel.length > 0) {
+                            for(var i=0; i<=this.athourSel.length; i++) {
+                                if(blog.data.filterathor.includes(this.athourSel[i])) {
+                                    return blog;
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+            if(this.filterSel.length == 0 && this.athourSel.length == 0) {
+                this.blogListCopy = this.blogList
+            }
+        },
+        topicFilter(topic) {
+            if(this.filterSel.includes(topic)) {
+                this.filterSel.splice(this.filterSel.indexOf(topic), 1);
+            } else {
+                this.filterSel.push(topic)
+            }
+            this.filterBlog()
         },
         authorFilter(topic) {
-            this.blogListCopy = this.blogList.filter((blog) => {
-                if(blog.data.filtertopics.length > 0) {
-                    if(blog.data.filtertopics.includes(topic)) {
-                        return blog;
-                    }
-                }
-            });
+            if(this.athourSel.includes(topic)) {
+                this.athourSel.splice(this.athourSel.indexOf(topic), 1);
+            } else {
+                this.athourSel.push(topic)
+            }
+            this.filterBlog()
         }
     }
 }
 </script>
 
 <style scoped>
+.filter-separate { 
+    margin-top: 50px;
+}
 .blog-filter-topics {
     text-align: left;
 }
