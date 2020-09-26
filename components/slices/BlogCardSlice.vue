@@ -6,7 +6,7 @@
                 <div class="blog-card row">
                     <div :class="[ topics_and_authors ? 'col-lg-9': 'col-lg-12']">
                         <div class="row">
-                            <div v-for="item in blogList" :key="item.id" class="card-main col-lg-4 col-sm-6 col-xs-12">
+                            <div v-for="(item, key) in blogList" :key="item.id"  v-for-callback="{key: key, array: blogListCopy, callback: callback}" class="card-main col-lg-4 col-sm-6 col-xs-12">
                                 <div class="content-wrap">
                                     <n-link :to="'/blog/'+item.uid" class="card-link">
                                     <!-- <prismic-link :field="item.blog_link" class="card-link"> -->
@@ -81,9 +81,12 @@ export default {
             blogListCopy: [],
             topicList:[],
             authorList:[],
-            topics_and_authors: this.slice.primary.authors_and_topics,
+            tempTopicList:[],
+            tempAuthorList:[],
+            topics_and_authors: false,
             filterSel: [],
             athourSel: [],
+            finished: false
         }
     },
     filters: {
@@ -102,6 +105,7 @@ export default {
         let limit= this.slice.primary.card_limit + 1;
         this.$prismic.api.query(this.$prismic.predicates.at('document.type', 'blogpage'), 	
         { orderings : '[my.blogpage.publish_date desc]', 'pageSize': limit }).then(async (response) => {
+            //this.blogList1 = response.results
             for (let blog of Object.values(response.results)) { 
                 if(blog.uid != this.slice.current_blog && this.blogList.length <= this.slice.primary.card_limit) {
                     let topicArray = await this.getTopics(blog)
@@ -109,17 +113,15 @@ export default {
                     if (typeof blog.data.author == 'object' && blog.data.author.id) {
                         let author = await this.$prismic.api.query(this.$prismic.predicates.at('document.id', blog.data.author.id))
                         authorArray.push(author.results[0])
-                        authorArray.forEach((content, index) => {
-                            this.authorList.push(content.data.author)
-                             blog.data.filterathor = content.data.author
-                        })
+                        authorArray = authorArray.map(content => content.data.author)
+                        this.tempAuthorList = [...this.tempAuthorList, ...authorArray]
+                        blog.data.filterathor = authorArray[0]
                     }
                     blog.data.topics = topicArray.length ? topicArray.slice(0, 3) : []
                     var filterTopics = [];
                     if(topicArray.length) {
-                        topicArray.forEach((content, index) => {
-                            filterTopics.push(content.data.topic)
-                        })
+                        filterTopics = topicArray.map(content => content.data.topic);
+                        this.tempTopicList = [...this.tempTopicList, ...filterTopics]
                     }
                     blog.data.filtertopics = filterTopics;
                     this.blogList.push(blog)
@@ -127,11 +129,42 @@ export default {
             }
             this.blogList = this.blogList.slice(0, this.slice.primary.card_limit)
             this.blogListCopy = this.blogList.slice(0, this.slice.primary.card_limit)
-            this.topicList = this.topicList.reduce((a,c)=> (a[c]=++a[c]||1,a) ,{});
-            this.authorList = this.authorList.reduce((a,c)=> (a[c]=++a[c]||1,a) ,{});
+            this.tempTopicList = this.tempTopicList.reduce((a,c)=> (a[c]=++a[c]||1,a) ,{});
+            this.tempAuthorList = this.tempAuthorList.reduce((a,c)=> (a[c]=++a[c]||1,a) ,{});
         });
     },
+    directives: {
+        forCallback(el, binding) {
+            
+            let element = binding.value
+            var key = element.key
+            var len = 0
+
+            if (Array.isArray(element.array)) {
+                len = element.array.length
+            }
+
+            else if (typeof element.array === 'object') {
+                var keys = Object.keys(element.array)
+                key = keys.indexOf(key)
+                len = keys.length
+            }
+            if (key == len - 1) {
+                if (typeof element.callback === 'function') {
+                    element.callback()
+                }
+            }
+        }
+    },
     methods: {
+        callback() {
+            this.topics_and_authors = this.slice.primary.authors_and_topics;
+            this.topicList = this.tempTopicList
+            this.authorList = this.tempAuthorList
+        },
+        getContent () {
+            //let topic = await this.$prismic.api.query(this.$prismic.predicates.at('document.id', blog.data.topics1[i].topic.id))
+        },
         async getTopics (blog) {
             let topicArray = []
             for (let i = 0; i < blog.data.topics1.length; i++) {
@@ -140,21 +173,7 @@ export default {
                     topicArray.push(topic.results[0])
                 }
             }
-            topicArray.forEach((content, index) => {
-                this.topicList.push(content.data.topic)
-			})
             return topicArray
-        },
-        async getAuthors(blog) {
-            let authorArray = []
-            if (typeof blog.data.author == 'object' && blog.data.author.id) {
-                let author = await this.$prismic.api.query(this.$prismic.predicates.at('document.id', blog.data.author.id))
-                authorArray.push(author.results[0])
-                authorArray.forEach((content, index) => {
-                    this.authorList.push(content.data.author)
-                })
-            }
-            return content.data.author
         },
         filterBlog() {
             if(this.filterSel.length > 0) {
@@ -167,6 +186,8 @@ export default {
                         }
                     }
                 });
+            } else {
+                 this.blogListCopy = this.blogList
             }
             if(this.athourSel.length > 0) {
                 this.blogListCopy = this.blogListCopy.filter((blog) => {
