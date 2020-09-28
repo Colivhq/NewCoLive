@@ -3,7 +3,7 @@ require('dotenv').config();
 export default {
   mode: 'universal',
   env: {
-    baseUrl: process.env.BASE_URL || 'https://newcolive.colivhq.com',
+    baseUrl: process.env.BASE_URL,
     mapKey: process.env.GOOGLE_MAP_KEY,
     // proxyUrl: 'https://cors-anywhere.herokuapp.com/',
     bearer: process.env.COLIV_HQ_KEY,
@@ -82,7 +82,7 @@ export default {
 	  }
   },
   prismic: {
-    endpoint: 'https://newcolive.cdn.prismic.io/api/v2',
+    endpoint: process.env.PRISMIC_ENDPOINT,
     linkResolver: '@/plugins/link-resolver',
     htmlSerializer: '@/plugins/html-serializer',
   },
